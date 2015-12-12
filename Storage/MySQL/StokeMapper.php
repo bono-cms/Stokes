@@ -49,33 +49,6 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     /**
      * Fetch all published
      * 
-     * @param integer $page
-     * @param integer $itemsPerPage
-     * @return array
-     */
-    public function fetchAllPublishedByPage($page, $itemsPerPage)
-    {
-        // Tweak paginator's instance
-        $this->paginator->setTotalAmount($this->countAllPublished())
-                        ->setItemsPerPage($itemsPerPage)
-                        ->setCurrentPage($page);
-        
-        // Now build a query
-        $query = sprintf('SELECT * FROM `%s` WHERE `langId` =:langId AND `published` =:published LIMIT %s, %s', 
-            self::getTableName(), 
-            $this->paginator->countOffset(), 
-            $this->paginator->getItemsPerpage()
-        );
-        
-        return $this->db->queryAll($query, array(
-            ':langId' => $this->getLangId(),
-            ':published' => '1'
-        ));
-    }
-
-    /**
-     * Fetch all published
-     * 
      * @return array
      */
     public function fetchAllPublished()
