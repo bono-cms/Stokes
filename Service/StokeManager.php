@@ -13,7 +13,6 @@ namespace Stokes\Service;
 
 use Admin\Service\AbstractManager;
 use Stokes\Storage\StokeMapperInterface;
-use stdclass;
 
 final class StokeManager extends AbstractManager implements StokeManagerInterface
 {
@@ -48,7 +47,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     /**
      * Returns prepared paginator instance
      * 
-     * @return Paginator
+     * @return \Krystal\Paginate\Paginator
      */
     public function getPaginator()
     {
@@ -68,23 +67,23 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     /**
      * Add one more stoke
      * 
-     * @param stdclass $container
+     * @param array $input Raw input data
      * @return boolean
      */
-    public function add(stdclass $container)
+    public function add(array $input)
     {
-        return $this->stokeMapper->insert($container);
+        return $this->stokeMapper->insert($input);
     }
 
     /**
      * Updates a record
      * 
-     * @param stdclass $container
+     * @param array $input Raw input data
      * @return boolean
      */
-    public function update(stdclass $container)
+    public function update(array $input)
     {
-        return $this->stokeMapper->update($container);
+        return $this->stokeMapper->update($input);
     }
 
     /**
