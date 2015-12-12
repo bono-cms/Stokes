@@ -53,13 +53,11 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
      */
     public function fetchAllPublished()
     {
-        // Build a query
-        $query = sprintf('SELECT * FROM `%s` WHERE `langId` = :langId AND `published` = :published', self::getTableName());
-        
-        return $this->db->queryAll($query, array(
-            ':langId' => $this->getLangId(),
-            ':published' => '1'
-        ));
+        return $this->db->select('*')
+                        ->from(self::getTableName())
+                        ->whereEquals('langId', $this->getLangId())
+                        ->andWhereEquals('published', '1')
+                        ->queryAll();
     }
 
     /**
