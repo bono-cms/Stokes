@@ -11,8 +11,7 @@
 
 namespace Stokes\Controller\Admin;
 
-use Admin\Controller\Admin\AbstractController;
-use stdclass;
+use Cms\Controller\Admin\AbstractController;
 
 final class Browser extends AbstractController
 {
@@ -25,9 +24,7 @@ final class Browser extends AbstractController
     public function indexAction($page = 1)
     {
         return $this->view->render('browser', array(
-            'breadcrumbs' => array(
-                '#' => 'Stokes'
-            )
+            'title' => 'Stokes'
         ));
     }
 
@@ -51,7 +48,6 @@ final class Browser extends AbstractController
     public function deleteSelectedAction()
     {
         if ($this->request->hasPost('toDelete') && $this->request->isAjax()) {
-            
             $ids = $this->request->getPost('toDelete');
         }
     }
@@ -64,8 +60,6 @@ final class Browser extends AbstractController
     public function saveAction()
     {
         if ($this->request->isPost() && $this->request->isAjax()) {
-            
-            $container = new stdclass;
         }
     }
 }
