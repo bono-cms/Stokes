@@ -18,14 +18,16 @@ use stdclass;
 final class StokeManager extends AbstractManager implements StokeManagerInterface
 {
     /**
-     * @var StokeMapperInterface
+     * Any compliant stoke mapper
+     * 
+     * @var \Stokes\Storage\StokeMapperInterface
      */
     private $stokeMapper;
 
     /**
      * State initialization
      * 
-     * @param StokeMapperInterface $stokeMapper Any mapper that implements this interface
+     * @param \Stokes\Storage\StokeMapperInterface $stokeMapper
      * @return void
      */
     public function __construct(StokeMapperInterface $stokeMapper)
