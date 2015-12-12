@@ -21,16 +21,9 @@ final class Module extends AbstractModule
 	 */ 
 	public function getServiceProviders()
 	{
-		$admin = $this->moduleManager->getModule('Admin');
-		
-		$mapperFactory	 = $admin->getService('mapperFactory');
-		$languageManager = $admin->getService('languageManager');
-		
-		$stokeMapper = $mapperFactory->build('/Stokes/Storage/MySQL/StokeMapper');
-		$stokeMapper->setLangId($languageManager->getCurrentId());
-		
+		$stokeMapper = $this->getMapper('/Stokes/Storage/MySQL/StokeMapper');
 		$stokeManager = new StokeManager($stokeMapper);
-		
+
 		return array(
 			'stokeManager' => $stokeManager
 		);
