@@ -13,39 +13,15 @@ namespace Stokes\Storage\MySQL;
 
 use Kernel\Storage\MySQL\AbstractMapper;
 use Stokes\Storage\StokeMapperInterface;
-use stdclass;
 
 final class StokeMapper extends AbstractMapper implements StokeMapperInterface
 {
     /**
      * {@inheritDoc}
      */
-    protected $table = 'bono_module_stokes';
-
-    /**
-     * Count all records
-     * 
-     * @return integer
-     */
-    private function countAll()
+    public static function getTableName()
     {
-        return $this->db->count($this->table, array(
-            'langId' => $this->getLangId()
-        ));
-    }
-
-    /**
-     * Count all published records
-     * 
-     * @return integer
-     */
-    private function countAllPublished()
-    {
-        return $this->db->count($this->table, array(
-            
-            'langId'    => $this->getLangId(),
-            'published' => '1'
-        ));
+        return 'bono_module_stokes';
     }
 
     /**
@@ -64,7 +40,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
         
         // Now build a query
         $query = sprintf('SELECT * FROM `%s` WHERE `langId` = :langId LIMIT %s, %s', 
-            $this->table, 
+            self::getTableName(), 
             $this->paginator->countOffset(), 
             $this->paginator->getItemsPerPage()
         );
@@ -90,7 +66,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
         
         // Now build a query
         $query = sprintf('SELECT * FROM `%s` WHERE `langId` =:langId AND `published` =:published LIMIT %s, %s', 
-            $this->table, 
+            self::getTableName(), 
             $this->paginator->countOffset(), 
             $this->paginator->getItemsPerpage()
         );
@@ -109,7 +85,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     public function fetchAllPublished()
     {
         // Build a query
-        $query = sprintf('SELECT * FROM `%s` WHERE `langId` = :langId AND `published` = :published', $this->table);
+        $query = sprintf('SELECT * FROM `%s` WHERE `langId` = :langId AND `published` = :published', self::getTableName());
         
         return $this->db->queryAll($query, array(
             ':langId' => $this->getLangId(),
@@ -125,7 +101,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
      */
     public function fetchById($id)
     {
-        $query = sprintf('SELECT * FROM `%s` WHERE `id` =:id', $this->table);
+        $query = sprintf('SELECT * FROM `%s` WHERE `id` =:id', self::getTableName());
         return $this->db->query($query, array(
             ':id' => $id
         ));
@@ -139,7 +115,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
      */
     public function deleteById($id)
     {
-        return $this->db->delete($this->table, array(
+        return $this->db->delete(self::getTableName(), array(
             'id' => $id
         ));
     }
@@ -147,12 +123,12 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     /**
      * Inserta a record
      * 
-     * @param stdclass $container
+     * @param array $container
      * @return boolean
      */
-    public function insert(stdclass $container)
+    public function insert(array $container)
     {
-        return $this->db->insert($this->table, array(
+        return $this->db->insert(self::getTableName(), array(
             
         ));
     }
@@ -160,12 +136,12 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     /**
      * Updates a record
      * 
-     * @param stdclass $container
+     * @param array $container
      * @return void
      */
-    public function update(stdclass $container)
+    public function update(array $container)
     {
-        return $this->db->update($this->table, array(
+        return $this->db->update(self::getTableName(), array(
             
             
         ), array('id' => $container->id));
