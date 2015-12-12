@@ -13,35 +13,35 @@ namespace Stokes\Controller\Admin;
 
 final class Add extends AbstractStoke
 {
-	/**
-	 * Shows adding form
-	 * 
-	 * @return string
-	 */
-	public function indexAction()
-	{
-		$title = 'Add a stoke';
-		
-		return $this->view->render($this->getTemplatePath(), (array(
-			'breadcrumbs' => array(
-				'#' => $title
-			),
-			
-			'title' => $title
-		)));
-	}
+    /**
+     * Shows adding form
+     * 
+     * @return string
+     */
+    public function indexAction()
+    {
+        $title = 'Add a stoke';
+        
+        return $this->view->render($this->getTemplatePath(), (array(
+            'breadcrumbs' => array(
+                '#' => $title
+            ),
+            
+            'title' => $title
+        )));
+    }
 
-	/**
-	 * Adds a record
-	 * 
-	 * @return string
-	 */
-	public function addAction()
-	{
-		if ($this->request->isPost() && $this->request->isAjax()) {
-			
-			$formValidator = $this->getValidator();
-			//...
-		}
-	}
+    /**
+     * Adds a record
+     * 
+     * @return string
+     */
+    public function addAction()
+    {
+        if ($this->request->isPost() && $this->request->isAjax()) {
+            
+            $formValidator = $this->getValidator();
+            //...
+        }
+    }
 }

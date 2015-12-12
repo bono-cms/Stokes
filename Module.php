@@ -16,16 +16,16 @@ use Stokes\Service\StokeManager;
 
 final class Module extends AbstractModule
 {
-	/**
-	 * {@inheritDoc}
-	 */ 
-	public function getServiceProviders()
-	{
-		$stokeMapper = $this->getMapper('/Stokes/Storage/MySQL/StokeMapper');
-		$stokeManager = new StokeManager($stokeMapper);
+    /**
+     * {@inheritDoc}
+     */ 
+    public function getServiceProviders()
+    {
+        $stokeMapper = $this->getMapper('/Stokes/Storage/MySQL/StokeMapper');
+        $stokeManager = new StokeManager($stokeMapper);
 
-		return array(
-			'stokeManager' => $stokeManager
-		);
-	}
+        return array(
+            'stokeManager' => $stokeManager
+        );
+    }
 }

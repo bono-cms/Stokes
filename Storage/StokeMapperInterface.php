@@ -13,5 +13,5 @@ namespace Stokes\Storage;
 
 interface StokeMapperInterface
 {
-	
+    
 }

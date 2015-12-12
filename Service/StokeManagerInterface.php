@@ -13,5 +13,5 @@ namespace Stokes\Service;
 
 interface StokeManagerInterface
 {
-	
+    
 }

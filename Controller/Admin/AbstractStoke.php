@@ -16,46 +16,46 @@ use stdclass;
 
 abstract class AbstractStoke extends AbstractController
 {
-	/**
-	 * Returns request container
-	 * 
-	 * @return \stdclass
-	 */
-	final protected function getContainer()
-	{
-		$container = new stdclass;
-		
-		return $container;
-	}
+    /**
+     * Returns request container
+     * 
+     * @return \stdclass
+     */
+    final protected function getContainer()
+    {
+        $container = new stdclass;
+        
+        return $container;
+    }
 
-	/**
-	 * Returns configured validator instance
-	 * 
-	 * @return Validator
-	 */
-	final protected function getValidator()
-	{
-		
-	}
+    /**
+     * Returns configured validator instance
+     * 
+     * @return Validator
+     */
+    final protected function getValidator()
+    {
+        
+    }
 
-	/**
-	 * Returns template path
-	 * 
-	 * @return string
-	 */
-	final protected function getTemplatePath()
-	{
-		
-	}
+    /**
+     * Returns template path
+     * 
+     * @return string
+     */
+    final protected function getTemplatePath()
+    {
+        
+    }
 
-	/**
-	 * Returns stoke manager
-	 * 
-	 * @return \Stokes\Service\StokeManager
-	 */
-	final protected function getStokeManager()
-	{
-		return $this->moduleManager->getModule('Stokes')->getService('stokeManager');
-	}
-	
+    /**
+     * Returns stoke manager
+     * 
+     * @return \Stokes\Service\StokeManager
+     */
+    final protected function getStokeManager()
+    {
+        return $this->moduleManager->getModule('Stokes')->getService('stokeManager');
+    }
+    
 }
