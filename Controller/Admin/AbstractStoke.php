@@ -3,7 +3,7 @@
 /**
  * This file is part of the Bono CMS
  * 
- * Copyright (c) 2014 Bono Team
+ * Copyright (c) No Global State Lab
  * 
  * For the full copyright and license information, please view
  * the license file that was distributed with this source code.
