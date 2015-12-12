@@ -13,6 +13,7 @@ namespace Stokes\Service;
 
 use Admin\Service\AbstractManager;
 use Stokes\Storage\StokeMapperInterface;
+use Krystal\Stdlib\VirtualEntity;
 
 final class StokeManager extends AbstractManager implements StokeManagerInterface
 {
@@ -37,11 +38,11 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     /**
      * {@inheritDoc}
      */
-    protected function toObject(array $stoke)
+    protected function toEntity(array $stoke)
     {
-        $container = new stdclass();
-        
-        return $container;
+        $entity = new VirtualEntity();
+        // @TODO: to be populated
+        return $entity;
     }
 
     /**
