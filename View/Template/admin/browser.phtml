@@ -1,135 +1,64 @@
 <?php
 
-$this->loadBlock('start', array(
-	'title' => 'Stokes'
-));
+use Krystal\Form\Element;
 
 ?>
 
-<main>
-	
-	<?php $this->loadBlock('breadcrumbs'); ?>
-	<?php $this->loadBlock('flash'); ?>
-	
-	<!--Menu-->
-	<div class="btn-toolbar">
-		<div class="btn-group">
-		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			<span class="glyphicon glyphicon-list"></span> <?php echo $this->translate('Menu'); ?>
-			<span class="caret"></span>
-		  </button>
-		  <ul class="dropdown-menu">
-			 <li><a href="/admin/module/stokes/add"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->translate('Add stoke'); ?></a></li>
-			 <li class="divider"></li>
-			 <li><a href="#" id="save-changes-btn"><span class="glyphicon glyphicon-floppy-save"></span> <?php echo $this->translate('Save changes'); ?></a></li>
-			 <li><a href="#" id="remove-selected-btn" data-button="remove-selected"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->translate('Remove selected'); ?></a></li>
-		  </ul>
-		</div>
-	</div>
-	<!--Menu-->
-	
-	<?php $this->loadBlock('items-per-page', array('caption' => 'Pages')); ?>
-	
-	<form>
-		<table class="list table-hover">
-			<thead>
-				<tr>
-					<th><input type="checkbox" /></th>
-					<th><?php $this->show('#'); ?></th>
-					<th><?php $this->show('Title'); ?></th>
-					<th><?php $this->show('Default'); ?></th>
-					<th><?php $this->show('SEO Enabled'); ?></th>
-					<th><?php $this->show('Actions'); ?></th>
-				</tr>
-			</thead>
-			
-			<?php if (!empty($pages)): ?>
-			<tbody>
-				<?php foreach ($pages as $page): ?>
-				<tr>
-					<td><input type="checkbox" name="toDelete[<?php echo $page->id; ?>]" /></td>
-					<td><?php echo $page->id; ?></td>
-					<td><?php echo $page->title; ?></td>
-					<td>
-						<?php $this->createElement('Radio', array(
-							'name'	  => 'default',
-							'value'	  => $page->id,
-							'checked' => $page->default
-						)); ?>
-					</td>
-					<td>
-						<?php $this->createElement('FormCheckbox', array(
-							'checked' => $page->seoEnabled,
-							'name'    => sprintf('seo[%s]', $page->id)
-						)); ?>
-					</td>
-					<td>
-						<a data-button="view" href="<?php printf('/%s/', $page->slug); ?>"></a>
-						<a data-button="edit" href="<?php printf('/admin/module/pages/edit/%s', $page->id); ?>"></a>
-						<a data-button="delete" href="#" data-category="main" data-id="<?php echo $page->id; ?>"></a>
-					</td>
-				</tr>
-				<?php endforeach; ?>
-			</tbody>
-			<?php endif; ?>
-			
-		</table>
-	</form>
-	
-	<?php $this->loadBlock('paginator'); ?>
-	
-</main>
+<div class="btn-toolbar">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-list"></span> <?php echo $this->translate('Menu'); ?>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+         <li><a href="/admin/module/stokes/add"><span class="glyphicon glyphicon-plus"></span> <?php echo $this->translate('Add stoke'); ?></a></li>
+         <li class="divider"></li>
+         <li><a href="#" id="save-changes-btn"><span class="glyphicon glyphicon-floppy-save"></span> <?php echo $this->translate('Save changes'); ?></a></li>
+         <li><a href="#" id="remove-selected-btn" data-button="remove-selected"><span class="glyphicon glyphicon-remove"></span> <?php echo $this->translate('Remove selected'); ?></a></li>
+      </ul>
+    </div>
+</div>
 
-<script>
-	
-	$(function() {
-		
-		$.delete({
-			categories : {
-				main : {
-					url : "/admin/module/pages/delete.ajax"
-				}
-			}
-		});
-		
-		$("#remove-selected-btn").click(function(event) {
-			event.preventDefault();
-			
-			var data = $("form").serialize();
-			
-			$.ajax({
-				url		: "/admin/module/pages/delete-selected.ajax",
-				data	: data,
-				success : function(response) {
-					if (response == "1") {
-						window.location.reload();
-					} else {
-						console.log(response);
-					}
-				}
-			});
-		});
-		
-		
-		$("#save-changes-btn").click(function(event) {
-			event.preventDefault();
-			$.ajax({
-				url		: "/admin/module/pages/save.ajax",
-				data	: $("form").serialize(),
-				success : function(response) {
-					if (response != "1") {
-						console.log(response);
-					} else {
-						window.location.reload();
-					}
-				}
-			});
-		});
-		
-		
-	});
-	
-	
-</script>
+<?php $this->loadBlock('items-per-page', array('caption' => 'Pages')); ?>
 
-<?php $this->loadBlock('end'); ?>
+<form>
+    <table class="table table-hover table-bordered table-striped table-condensed">
+        <thead>
+            <tr>
+                <th><input type="checkbox" /></th>
+                <th><?php $this->show('#'); ?></th>
+                <th><?php $this->show('Title'); ?></th>
+                <th><?php $this->show('Default'); ?></th>
+                <th><?php $this->show('SEO Enabled'); ?></th>
+                <th><?php $this->show('Actions'); ?></th>
+            </tr>
+        </thead>
+        
+        <?php if (!empty($pages)): ?>
+        <tbody>
+            <?php foreach ($pages as $page): ?>
+            <tr>
+                <td><input type="checkbox" name="toDelete[<?php echo $page->id; ?>]" /></td>
+                <td><?php echo $page->id; ?></td>
+                <td><?php echo $page->title; ?></td>
+                <td>
+                    <?php echo Element::radio('default', $page->id, $page->default); ?>
+                </td>
+                <td>
+                    <?php echo Element::checkbox(sprintf('seo[%s]', $page->id), $page->seoEnabled); ?>
+                </td>
+                <td>
+                    <a data-button="view" href="<?php printf('/%s/', $page->slug); ?>"></a>
+                    <a data-button="edit" href="<?php printf('/admin/module/pages/edit/%s', $page->id); ?>"></a>
+                    <a data-button="delete" href="#" data-category="main" data-id="<?php echo $page->id; ?>"></a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+        <?php endif; ?>
+        
+    </table>
+</form>
+
+<?php $this->loadBlock('paginator'); ?>
+
