@@ -11,10 +11,10 @@
 
 namespace Stokes;
 
-use Bono\Application\Module\AbstractModule;
+use Cms\AbstractCmsModule;
 use Stokes\Service\StokeManager;
 
-final class Module extends AbstractModule
+final class Module extends AbstractCmsModule
 {
     /**
      * {@inheritDoc}
