@@ -36,7 +36,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     {
         $db = $this->db->select('*')
                         ->from(self::getTableName())
-                        ->whereEquals('langId', $this->getLangId());
+                        ->whereEquals('lang_id', $this->getlang_id());
 
         if ($published === true) {
             $db->andWhereEquals('published', '1');
@@ -55,7 +55,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     {
         return $this->db->select('*')
                         ->from(self::getTableName())
-                        ->whereEquals('langId', $this->getLangId())
+                        ->whereEquals('lang_id', $this->getlang_id())
                         ->andWhereEquals('published', '1')
                         ->queryAll();
     }
