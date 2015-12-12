@@ -34,23 +34,23 @@ use Krystal\Form\Element;
             </tr>
         </thead>
         
-        <?php if (!empty($pages)): ?>
+        <?php if (!empty($stokes)): ?>
         <tbody>
-            <?php foreach ($pages as $page): ?>
+            <?php foreach ($stokes as $stoke): ?>
             <tr>
-                <td><input type="checkbox" name="toDelete[<?php echo $page->id; ?>]" /></td>
-                <td><?php echo $page->id; ?></td>
-                <td><?php echo $page->title; ?></td>
+                <td><input type="checkbox" name="toDelete[<?php echo $stoke->id; ?>]" /></td>
+                <td><?php echo $stoke->id; ?></td>
+                <td><?php echo $stoke->title; ?></td>
                 <td>
-                    <?php echo Element::radio('default', $page->id, $page->default); ?>
+                    <?php echo Element::radio('default', $stoke->id, $stoke->default); ?>
                 </td>
                 <td>
-                    <?php echo Element::checkbox(sprintf('seo[%s]', $page->id), $page->seoEnabled); ?>
+                    <?php echo Element::checkbox(sprintf('seo[%s]', $stoke->id), $stoke->seoEnabled); ?>
                 </td>
                 <td>
-                    <a data-button="view" href="<?php printf('/%s/', $page->slug); ?>"></a>
-                    <a data-button="edit" href="<?php printf('/admin/module/pages/edit/%s', $page->id); ?>"></a>
-                    <a data-button="delete" href="#" data-category="main" data-id="<?php echo $page->id; ?>"></a>
+                    <a data-button="view" href="<?php printf('/%s/', $stoke->slug); ?>"></a>
+                    <a data-button="edit" href="<?php printf('/admin/module/pages/edit/%s', $stoke->id); ?>"></a>
+                    <a data-button="delete" href="#" data-category="main" data-id="<?php echo $stoke->id; ?>"></a>
                 </td>
             </tr>
             <?php endforeach; ?>
