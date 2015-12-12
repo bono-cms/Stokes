@@ -70,10 +70,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
      */
     public function fetchById($id)
     {
-        $query = sprintf('SELECT * FROM `%s` WHERE `id` =:id', self::getTableName());
-        return $this->db->query($query, array(
-            ':id' => $id
-        ));
+        return $this->findByPk($id);
     }
 
     /**
@@ -84,35 +81,28 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
      */
     public function deleteById($id)
     {
-        return $this->db->delete(self::getTableName(), array(
-            'id' => $id
-        ));
+        return $this->deleteByPk($id);
     }
-    
+
     /**
-     * Inserta a record
+     * Insert a record
      * 
-     * @param array $container
+     * @param array $input Raw input data
      * @return boolean
      */
-    public function insert(array $container)
+    public function insert(array $input)
     {
-        return $this->db->insert(self::getTableName(), array(
-            
-        ));
+        return $this->persist($this->getWithLang($input));
     }
 
     /**
      * Updates a record
      * 
-     * @param array $container
+     * @param array $input Raw input data
      * @return void
      */
-    public function update(array $container)
+    public function update(array $input)
     {
-        return $this->db->update(self::getTableName(), array(
-            
-            
-        ), array('id' => $container->id));
+        return $this->persist($input);
     }
 }
