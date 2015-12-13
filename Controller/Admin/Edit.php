@@ -29,7 +29,8 @@ final class Edit extends AbstractStoke
             $this->loadBreadcrumbs('Add a stoke');
 
             return $this->view->render($this->getTemplatePath(), array(
-                'title' => $title
+                'title' => $title,
+                'stoke' => $stoke
             ));
 
         } else {

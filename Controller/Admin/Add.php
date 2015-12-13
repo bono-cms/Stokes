@@ -11,6 +11,8 @@
 
 namespace Stokes\Controller\Admin;
 
+use Krystal\Stdlib\VirtualEntity;
+
 final class Add extends AbstractStoke
 {
     /**
@@ -22,8 +24,12 @@ final class Add extends AbstractStoke
     {
         $this->loadBreadcrumbs('Add a stoke');
 
+        $stoke = new VirtualEntity();
+        $stoke->setPublished(true);
+
         return $this->view->render($this->getTemplatePath(), array(
-            'title' => 'Add a stoke'
+            'title' => 'Add a stoke',
+            'stoke' => $stoke
         ));
     }
 
