@@ -23,6 +23,9 @@ final class Browser extends AbstractController
      */
     public function indexAction($page = 1)
     {
+        $this->view->getBreadcrumbBag()
+                   ->addOne('Stokes');
+
         return $this->view->render('browser', array(
             'title' => 'Stokes'
         ));
