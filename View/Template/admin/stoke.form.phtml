@@ -9,10 +9,10 @@ use Krystal\Form\Element;
         <?php echo Element::hidden('stoke[id]', $stoke->getId()); ?>
 
 		<div class="form-group clearfix">
-			<label class="col-lg-2 control-label"><?php $this->show('Name'); ?></label>
+			<label class="col-lg-2 control-label"><?php $this->show('Title'); ?></label>
 			<div class="col-lg-10">
 				<div class="input-group">
-                    <?php echo Element::text('stoke[name]', $stoke->getName(), array('class' => 'form-control', 'placeholder' => $this->translate('Stoke name'))); ?>
+                    <?php echo Element::text('stoke[title]', $stoke->getName(), array('class' => 'form-control', 'placeholder' => $this->translate('Title for the stoke to be created'))); ?>
 					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
 				</div>
 			</div>
