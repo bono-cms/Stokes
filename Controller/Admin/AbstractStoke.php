@@ -16,6 +16,18 @@ use Cms\Controller\Admin\AbstractController;
 abstract class AbstractStoke extends AbstractController
 {
     /**
+     * Load breadcrumbs for a view
+     * 
+     * @param string $title
+     * @return void
+     */
+    final protected function loadBreadcrumbs($title)
+    {
+        $this->view->getBreadcrumbBag()->addOne('Stoke', 'Stokes:Admin:Browser@indexAction')
+                                       ->addOne($title);
+    }
+
+    /**
      * Returns configured validator instance
      * 
      * @return Validator

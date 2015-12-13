@@ -20,15 +20,11 @@ final class Add extends AbstractStoke
      */
     public function indexAction()
     {
-        $title = 'Add a stoke';
-        
-        return $this->view->render($this->getTemplatePath(), (array(
-            'breadcrumbs' => array(
-                '#' => $title
-            ),
-            
-            'title' => $title
-        )));
+        $this->loadBreadcrumbs('Add a stoke');
+
+        return $this->view->render($this->getTemplatePath(), array(
+            'title' => 'Add a stoke'
+        ));
     }
 
     /**

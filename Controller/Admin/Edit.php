@@ -22,23 +22,17 @@ final class Edit extends AbstractStoke
     public function indexAction($id)
     {
         $stoke = $this->getStokeManager()->fetchById($id);
-        
+
         if ($stoke !== false) {
-            
-            $this->loadSharedPlugins();
+
             $title = 'Edit the stoke';
-            
+            $this->loadBreadcrumbs('Add a stoke');
+
             return $this->view->render($this->getTemplatePath(), array(
-                'breadcrumbs' => array(
-                    '#' => $title
-                ),
-                
-                'editing' => true,
                 'title' => $title
             ));
-        
+
         } else {
-            
             return false;
         }
     }
