@@ -11,23 +11,10 @@
 
 namespace Stokes\Controller\Admin;
 
-use Admin\Controller\Admin\AbstractController;
-use stdclass;
+use Cms\Controller\Admin\AbstractController;
 
 abstract class AbstractStoke extends AbstractController
 {
-    /**
-     * Returns request container
-     * 
-     * @return \stdclass
-     */
-    final protected function getContainer()
-    {
-        $container = new stdclass;
-        
-        return $container;
-    }
-
     /**
      * Returns configured validator instance
      * 
@@ -35,7 +22,6 @@ abstract class AbstractStoke extends AbstractController
      */
     final protected function getValidator()
     {
-        
     }
 
     /**
@@ -45,7 +31,7 @@ abstract class AbstractStoke extends AbstractController
      */
     final protected function getTemplatePath()
     {
-        
+        return 'stoke.form';
     }
 
     /**
@@ -55,7 +41,6 @@ abstract class AbstractStoke extends AbstractController
      */
     final protected function getStokeManager()
     {
-        return $this->moduleManager->getModule('Stokes')->getService('stokeManager');
+        return $this->getModuleService('stokeManager');
     }
-    
 }
