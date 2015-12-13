@@ -16,6 +16,18 @@ use Cms\Controller\Admin\AbstractController;
 abstract class AbstractStoke extends AbstractController
 {
     /**
+     * Loads shared view plugins
+     * 
+     * @return void
+     */
+    final protected function loadSharedPlugins()
+    {
+        $this->view->getPluginBag()
+                   ->appendScript('@Stokes/admin/stoke.form.js')
+                   ->load(array($this->getWysiwygPluginName(), 'datepicker'));
+    }
+
+    /**
      * Load breadcrumbs for a view
      * 
      * @param string $title

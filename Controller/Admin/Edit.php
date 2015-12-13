@@ -27,6 +27,7 @@ final class Edit extends AbstractStoke
 
             $title = 'Edit the stoke';
             $this->loadBreadcrumbs('Add a stoke');
+            $this->loadSharedPlugins();
 
             return $this->view->render($this->getTemplatePath(), array(
                 'title' => $title,

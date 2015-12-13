@@ -23,6 +23,7 @@ final class Add extends AbstractStoke
     public function indexAction()
     {
         $this->loadBreadcrumbs('Add a stoke');
+        $this->loadSharedPlugins();
 
         $stoke = new VirtualEntity();
         $stoke->setPublished(true);
