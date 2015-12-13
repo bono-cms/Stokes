@@ -35,7 +35,7 @@ abstract class AbstractStoke extends AbstractController
      */
     final protected function loadBreadcrumbs($title)
     {
-        $this->view->getBreadcrumbBag()->addOne('Stoke', 'Stokes:Admin:Browser@indexAction')
+        $this->view->getBreadcrumbBag()->addOne('Stokes', 'Stokes:Admin:Browser@indexAction')
                                        ->addOne($title);
     }
 
