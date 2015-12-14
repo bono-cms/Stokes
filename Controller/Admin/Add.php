@@ -35,16 +35,24 @@ final class Add extends AbstractStoke
     }
 
     /**
-     * Adds a record
+     * Adds a stoke
      * 
      * @return string
      */
     public function addAction()
     {
-        if ($this->request->isPost() && $this->request->isAjax()) {
-            
-            $formValidator = $this->getValidator();
-            //...
+        $formValidator = $this->getValidator($this->request->getPost('stoke'));
+
+        if ($formValidator->isValid()) {
+
+            $stokeManager = $this->getModuleService('stokeManager');
+            $stokeManager->add($this->request->getPost('stoke'));
+
+            $this->flashBag->set('success', 'A stoke has been added successfully');
+            return $stokeManager->getLastId();
+
+        } else {
+            return $formValidator->getErrors();
         }
     }
 }
