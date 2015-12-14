@@ -98,6 +98,23 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     {
         return $this->stokeMapper->deleteById($id);
     }
+    
+    /**
+     * Remove stokes by their associated ids
+     * 
+     * @param array $ids Collection of ids
+     * @return boolean
+     */
+    public function deleteByIds(array $ids)
+    {
+        foreach ($ids as $id) {
+            if ($this->stokeMapper->deleteById($id)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     /**
      * Fetches a record by its associated id
