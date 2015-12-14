@@ -46,23 +46,18 @@ final class Edit extends AbstractStoke
      */
     public function updateAction()
     {
-        if ($this->request->isPost() && $this->request->isAjax()) {
-            
-            $formValidator = $this->getValidator();
-            
-            if (1) {
-                
-                $stokeManager = $this->getStokeManager();
-                $stokeManager->update($this->getContainer());
-                
-                $this->flashMessenger->set('success', 'A stoke has been update successfully');
-                
-                return '1';
-            
-            } else {
-                
-                return $formValidator->getErrors();
-            }
+        $formValidator = $this->getValidator($this->request->getPost('stoke'));
+
+        if ($formValidator->isValid()) {
+
+            $stokeManager = $this->getModuleService('stokeManager');
+            $stokeManager->update($this->request->getPost('stoke'));
+
+            $this->flashMessenger->set('success', 'The stoke has been update successfully');
+            return '1';
+
+        } else {
+            return $formValidator->getErrors();
         }
     }
 }
