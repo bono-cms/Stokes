@@ -125,10 +125,11 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
      * 
      * @param integer $page
      * @param integer $itemsPerPage
+     * @param boolean $published Whether to fetch only published records
      * @return array
      */
-    public function fetchAllPublishedByPage($page, $itemsPerPage)
+    public function fetchAllByPage($page, $itemsPerPage, $published)
     {
-        return $this->prepareResults($this->stokeMapper->fetchAllPublishedByPage($page, $itemsPerPage));
+        return $this->prepareResults($this->stokeMapper->fetchAllByPage($page, $itemsPerPage, $published));
     }
 }
