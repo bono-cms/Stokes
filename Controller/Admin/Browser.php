@@ -80,13 +80,21 @@ final class Browser extends AbstractController
     }
 
     /**
-     * Saves the table table
+     * Save changes
      * 
      * @return string
      */
     public function saveAction()
     {
         if ($this->request->isPost() && $this->request->isAjax()) {
+
+            $published = $this->request->getPost('published');
+
+            $stokeManager = $this->getModuleService('stokeManager');
+            $stokeManager->updatePublished($published);
+
+            $this->flashBag->set('success', 'Configuration has been updated successfully');
+            return '1';
         }
     }
 }
