@@ -44,7 +44,7 @@ final class Browser extends AbstractController
     }
 
     /**
-     * Deletes a record
+     * Deletes a stoke
      * 
      * @return string
      */
@@ -52,6 +52,12 @@ final class Browser extends AbstractController
     {
         if ($this->request->hasPost('id') && $this->request->isAjax()) {
             $id = $this->request->getPost('id');
+
+            $stokeManager = $this->getModuleService('stokeManager');
+            $stokeManager->deleteById($id);
+
+            $this->flashBag->set('success', 'The stoke has been removed successfully');
+            return '1';
         }
     }
 
