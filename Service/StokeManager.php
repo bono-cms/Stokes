@@ -47,6 +47,23 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
+     * Update published states by their associated ids
+     * 
+     * @param array $pair
+     * @return boolean
+     */
+    public function updatePublished(array $pair)
+    {
+        foreach ($pair as $id => $state) {
+            if (!$this->stokeMapper->updatePublishedState($id, $state)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Returns prepared paginator instance
      * 
      * @return \Krystal\Paginate\Paginator
