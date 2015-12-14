@@ -16,18 +16,30 @@ use Cms\Controller\Admin\AbstractController;
 final class Browser extends AbstractController
 {
     /**
-     * Default action
+     * Displays a grid
      * 
-     * @param integer $page
+     * @param integer $page Current page number
      * @return string
      */
     public function indexAction($page = 1)
     {
+        $stokeManager = $this->getModuleService('stokeManager');
+
+        // Fetch stoke entities for display
+        $stokes = $stokeManager->fetchAllByPage($page, $this->getSharedPerPageCount(), false);
+
+        // Tweak pagination
+        $paginator = $stokeManager->getPaginator();
+        $paginator->setUrl('/admin/module/stokes/page/(:var)');
+
+        // Append a breadcrumb
         $this->view->getBreadcrumbBag()
                    ->addOne('Stokes');
 
         return $this->view->render('browser', array(
-            'title' => 'Stokes'
+            'title' => 'Stokes',
+            'stokes' => $stokes,
+            'paginator' => $paginator
         ));
     }
 
