@@ -8,7 +8,7 @@ CREATE TABLE `bono_module_stokes` (
 	`timestamp_end` INT NOT NULL,
 	`name` varchar(254) NOT NULL,
 	`title` varchar(254) NOT NULL,
-	`intro` TEXT NOT NULL,
+	`introduction` TEXT NOT NULL,
 	`full` TEXT NOT NULL,
 	`keywords` TEXT NOT NULL,
 	`meta_description` TEXT NOT NULL,
