@@ -62,17 +62,23 @@ final class Browser extends AbstractController
     }
 
     /**
-     * Delete selected records
+     * Delete selected stokes
      * 
      * @return string
      */
     public function deleteSelectedAction()
     {
         if ($this->request->hasPost('toDelete') && $this->request->isAjax()) {
-            $ids = $this->request->getPost('toDelete');
+            $ids = array_keys($this->request->getPost('toDelete'));
+
+            $stokeManager = $this->getModuleService('stokeManager');
+            $stokeManager->deleteByIds($ids);
+
+            $this->flashBag->set('success', 'Selected stokes have been removed successfully');
+            return '1';
         }
     }
-    
+
     /**
      * Saves the table table
      * 
