@@ -11,7 +11,7 @@
 
 namespace Stokes\Service;
 
-use Admin\Service\AbstractManager;
+use Cms\Service\AbstractManager;
 use Stokes\Storage\StokeMapperInterface;
 use Krystal\Stdlib\VirtualEntity;
 

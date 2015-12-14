@@ -11,7 +11,7 @@
 
 namespace Stokes\Storage\MySQL;
 
-use Kernel\Storage\MySQL\AbstractMapper;
+use Cms\Storage\MySQL\AbstractMapper;
 use Stokes\Storage\StokeMapperInterface;
 
 final class StokeMapper extends AbstractMapper implements StokeMapperInterface
