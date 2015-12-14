@@ -12,6 +12,7 @@
 namespace Stokes\Controller\Admin;
 
 use Cms\Controller\Admin\AbstractController;
+use Krystal\Validate\Pattern;
 
 abstract class AbstractStoke extends AbstractController
 {
@@ -42,10 +43,21 @@ abstract class AbstractStoke extends AbstractController
     /**
      * Returns configured validator instance
      * 
-     * @return Validator
+     * @param array $input
+     * @return \Krystal\Validate\ValidatorChain
      */
-    final protected function getValidator()
+    final protected function getValidator(array $input)
     {
+        return $this->validatorFactory->build(array(
+            'input' => array(
+                'source' => $input,
+                'definition' => array(
+                    'title' => new Pattern\Title(),
+                    'introduction' => new Pattern\IntroText(),
+                    'full'  => new Pattern\FullText(),
+                )
+            )
+        ));
     }
 
     /**
