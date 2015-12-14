@@ -14,6 +14,7 @@ namespace Stokes\Service;
 use Cms\Service\AbstractManager;
 use Stokes\Storage\StokeMapperInterface;
 use Krystal\Stdlib\VirtualEntity;
+use Krystal\Stdlib\ArrayUtils;
 
 final class StokeManager extends AbstractManager implements StokeManagerInterface
 {
@@ -66,25 +67,25 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Add one more stoke
+     * Add a stoke
      * 
      * @param array $input Raw input data
      * @return boolean
      */
     public function add(array $input)
     {
-        return $this->stokeMapper->insert($input);
+        return $this->stokeMapper->insert(ArrayUtils::arrayWithout($input, array('slug')));
     }
 
     /**
-     * Updates a record
+     * Updates a stoke
      * 
      * @param array $input Raw input data
      * @return boolean
      */
     public function update(array $input)
     {
-        return $this->stokeMapper->update($input);
+        return $this->stokeMapper->update(ArrayUtils::arrayWithout($input, array('slug')));
     }
 
     /**
