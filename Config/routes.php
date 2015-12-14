@@ -15,6 +15,10 @@ return array(
         'controller' => 'Admin:Browser@indexAction'
     ),
     
+    '/admin/module/stokes/page/(:var)' => array(
+        'controller' => 'Admin:Browser@indexAction'
+    ),
+    
     '/admin/module/stokes/add' => array(
         'controller' => 'Admin:Add@indexAction'
     ),
