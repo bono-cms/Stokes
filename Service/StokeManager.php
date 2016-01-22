@@ -117,7 +117,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Delete a record by its associated id
+     * Delete a stoke by its associated id
      * 
      * @param string $id
      * @return boolean
@@ -128,7 +128,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Remove stokes by their associated ids
+     * Delete stokes by their associated ids
      * 
      * @param array $ids Collection of ids
      * @return boolean
@@ -145,7 +145,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Fetches a record by its associated id
+     * Fetches stoke's entity by its associated id
      * 
      * @param string $id
      * @return array
@@ -156,7 +156,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Fetch all published stokes
+     * Fetches all published stoke entities
      * 
      * @return array
      */
@@ -166,11 +166,11 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Fetch all published by page
+     * Fetches all stoke entities filtered by pagination
      * 
      * @param integer $page
      * @param integer $itemsPerPage
-     * @param boolean $published Whether to fetch only published records
+     * @param boolean $published Whether to fetch only published ones
      * @return array
      */
     public function fetchAllByPage($page, $itemsPerPage, $published)
