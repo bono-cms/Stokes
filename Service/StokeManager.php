@@ -117,7 +117,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Delete a stoke by its associated id
+     * Deletes a stoke by its associated id
      * 
      * @param string $id
      * @return boolean
