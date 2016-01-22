@@ -42,7 +42,18 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     protected function toEntity(array $stoke)
     {
         $entity = new VirtualEntity();
-        // @TODO: to be populated
+        $entity->setId((int) $stoke['id'])
+               ->setLangId($stoke['lang_id'])
+               ->setTimestampStart($stoke['timestamp_start'])
+               ->setTimestampEnd($stoke['timestamp_end'])
+               ->setName($stoke['name'])
+               ->setTitle($stoke['title'])
+               ->setIntroduction($stoke['introduction'])
+               ->setDescription($stoke['description'])
+               ->setKeywords($stoke['keywords'])
+               ->setMetaDescription($stoke['meta_description'])
+               ->setCover($stoke['cover']);
+
         return $entity;
     }
 
@@ -115,7 +126,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     {
         return $this->stokeMapper->deleteById($id);
     }
-    
+
     /**
      * Remove stokes by their associated ids
      * 
