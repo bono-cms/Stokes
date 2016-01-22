@@ -51,7 +51,12 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
                         ->whereEquals('lang_id', $this->getLangId());
 
         if ($published === true) {
-            $db->andWhereEquals('published', '1');
+            $db->andWhereEquals('published', '1')
+               ->orderBy('timestamp_start')
+               ->desc();
+        } else {
+            $db->orderBy('id')
+               ->desc();
         }
 
         return $db->paginate($page, $itemsPerPage)
