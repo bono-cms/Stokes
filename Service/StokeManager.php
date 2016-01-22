@@ -95,7 +95,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Add a stoke
+     * Adds a stoke
      * 
      * @param array $input Raw input data
      * @return boolean
