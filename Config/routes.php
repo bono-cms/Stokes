@@ -10,36 +10,27 @@
  */
 
 return array(
-    
     '/admin/module/stokes' => array(
-        'controller' => 'Admin:Browser@indexAction'
+        'controller' => 'Admin:Stoke@gridAction'
     ),
     
     '/admin/module/stokes/page/(:var)' => array(
-        'controller' => 'Admin:Browser@indexAction'
+        'controller' => 'Admin:Stoke@gridAction'
     ),
     
     '/admin/module/stokes/add' => array(
-        'controller' => 'Admin:Add@indexAction'
-    ),
-    
-    '/admin/module/stokes/add.ajax' => array(
-        'controller' => 'Admin:Add@addAction'
+        'controller' => 'Admin:Stoke@addAction'
     ),
     
     '/admin/module/stokes/edit/(:var)' => array(
-        'controller' => 'Admin:Edit@indexAction'
+        'controller' => 'Admin:Stoke@editAction'
     ),
     
-    '/admin/module/stokes/edit.ajax' => array(
-        'controller' => 'Admin:Edit@updateAction'
+    '/admin/module/stokes/save' => array(
+        'controller' => 'Admin:Stoke@saveAction'
     ),
     
-    '/admin/module/stokes/delete.ajax' => array(
-        'controller' => 'Admin:Browser@deleteAction'
-    ),
-    
-    '/admin/module/stokes/delete-selected.ajax' => array(
-        'controller' => 'Admin:Browser@deleteSelectedAction'
+    '/admin/module/stokes/delete' => array(
+        'controller' => 'Admin:Stoke@deleteAction'
     )
 );

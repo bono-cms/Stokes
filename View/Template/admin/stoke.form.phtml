@@ -66,11 +66,11 @@ use Krystal\Form\Element;
     </div>
 
     <?php if (!$stoke->getId()): ?>
-    <button data-button="add" data-back-url="<?php echo $this->url('Stokes:Admin:Edit@indexAction', null); ?>" data-url="<?php echo $this->url('Stokes:Admin:Add@addAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Add'); ?></button>
+    <button data-button="add" data-back-url="<?php echo $this->url('Stokes:Admin:Stoke@editAction', null); ?>" data-url="<?php echo $this->url('Stokes:Admin:Stoke@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Add'); ?></button>
     <?php else: ?>
     
-    <button data-button="save" data-url="<?php echo $this->url('Stokes:Admin:Edit@updateAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save'); ?></button>
+    <button data-button="save" data-url="<?php echo $this->url('Stokes:Admin:Stoke@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save'); ?></button>
     <?php endif; ?>
     
-    <button data-button="cancel" data-url="<?php echo $this->url('Stokes:Admin:Browser@indexAction'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-floppy-remove"></i> <?php $this->show('Cancel'); ?></button>
+    <button data-button="cancel" data-url="<?php echo $this->url('Stokes:Admin:Stoke@gridAction'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-floppy-remove"></i> <?php $this->show('Cancel'); ?></button>
 </form>
