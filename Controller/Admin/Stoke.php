@@ -113,27 +113,7 @@ final class Stoke extends AbstractController
      */
     public function deleteAction()
     {
-        // Batch removal
-        if ($this->request->hasPost('toDelete') && $this->request->isAjax()) {
-            $ids = array_keys($this->request->getPost('toDelete'));
-
-            $stokeManager = $this->getModuleService('stokeManager');
-            $stokeManager->deleteByIds($ids);
-
-            $this->flashBag->set('success', 'Selected stokes have been removed successfully');
-        }
-
-        // Single removal
-        if ($this->request->hasPost('id') && $this->request->isAjax()) {
-            $id = $this->request->getPost('id');
-
-            $stokeManager = $this->getModuleService('stokeManager');
-            $stokeManager->deleteById($id);
-
-            $this->flashBag->set('success', 'The stoke has been removed successfully');
-        }
-
-        return '1';
+        return $this->invokeRemoval('stokeManager');
     }
 
     /**
@@ -163,7 +143,7 @@ final class Stoke extends AbstractController
     {
         $input = $this->request->getPost('stoke');
 
-        $formValidator = $this->validatorFactory->build(array(
+        return $this->invokeSave('stokeManager', $input['id'], $input, array(
             'input' => array(
                 'source' => $input,
                 'definition' => array(
@@ -173,25 +153,5 @@ final class Stoke extends AbstractController
                 )
             )
         ));
-
-        if ($formValidator->isValid()) {
-            $stokeManager = $this->getModuleService('stokeManager');
-
-            if ($input['id']) {
-                $stokeManager->update($this->request->getPost('stoke'));
-                $this->flashMessenger->set('success', 'The stoke has been update successfully');
-                return '1';
-
-            } else {
-
-                $stokeManager->add($input);
-                $this->flashBag->set('success', 'A stoke has been added successfully');
-                return $stokeManager->getLastId();
-            }
-
-        } else {
-            return $formValidator->getErrors();
-        }
-        
     }
 }

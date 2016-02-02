@@ -21,14 +21,14 @@ use Krystal\Form\Element;
 		<div class="form-group clearfix">
 			<label class="col-lg-2 control-label"><?php $this->show('Introduction'); ?></label>
 			<div class="col-lg-10">
-                <?php echo Element::text('stoke[introduction]', $stoke->getIntroduction(), array('class' => 'form-control')); ?>
+                <?php echo Element::textarea('stoke[introduction]', $stoke->getIntroduction(), array('class' => 'form-control', 'data-wysiwyg' => 'true')); ?>
 			</div>
 		</div>
 
 		<div class="form-group clearfix">
 			<label class="col-lg-2 control-label"><?php $this->show('Full description'); ?></label>
 			<div class="col-lg-10">
-                <?php echo Element::text('stoke[full]', $stoke->getIntroduction(), array('class' => 'form-control')); ?>
+                <?php echo Element::textarea('stoke[full]', $stoke->getIntroduction(), array('class' => 'form-control', 'data-wysiwyg' => 'true')); ?>
 			</div>
 		</div>
 
