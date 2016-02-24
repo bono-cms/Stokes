@@ -149,7 +149,7 @@ final class Stoke extends AbstractController
                 'definition' => array(
                     'title' => new Pattern\Title(),
                     'introduction' => new Pattern\IntroText(),
-                    'full'  => new Pattern\FullText(),
+                    'description'  => new Pattern\FullText(),
                 )
             )
         ));
