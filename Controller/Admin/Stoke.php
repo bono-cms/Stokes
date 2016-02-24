@@ -68,7 +68,7 @@ final class Stoke extends AbstractController
      * @param string $id
      * @return string
      */
-    public function editForm($id)
+    public function editAction($id)
     {
         $stoke = $this->getStokeManager()->fetchById($id);
 
