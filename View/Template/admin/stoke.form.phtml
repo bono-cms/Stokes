@@ -32,37 +32,39 @@ use Krystal\Form\Element;
 			</div>
 		</div>
 
-        <div class="form-group clearfix">
-            <label class="col-lg-2 control-label"><?php $this->show('Slug'); ?></label>
-            <div class="col-lg-10">
-                <div class="input-group">
-                    <?php echo Element::text('stoke[slug]', $stoke->getSlug(), array('class' => 'form-control', 'data-input' => 'slug', 'placeholder' => 'URL slug for this stoke. By default is taken from a title')); ?>
-                    <span class="input-group-addon">
-                        <a href="#" data-button="slug"><i class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="<?php $this->show('Refresh the slug'); ?>"></i></a>
-                    </span>
+        <div class="options">
+            <div class="form-group clearfix">
+                <label class="col-lg-2 control-label"><?php $this->show('Slug'); ?></label>
+                <div class="col-lg-10">
+                    <div class="input-group">
+                        <?php echo Element::text('stoke[slug]', $stoke->getSlug(), array('class' => 'form-control', 'data-input' => 'slug', 'placeholder' => 'URL slug for this stoke. By default is taken from a title')); ?>
+                        <span class="input-group-addon">
+                            <a href="#" data-button="slug"><i class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="<?php $this->show('Refresh the slug'); ?>"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group clearfix">
+                <label class="col-lg-2 control-label"><?php $this->show('Keywords'); ?></label>
+                <div class="col-lg-10">
+                    <div class="input-group">
+                        <?php echo Element::text('stoke[keywords]', $stoke->getKeywords(), array('class' => 'form-control', 'placeholder' => $this->translate('Keywords for search engines'))); ?>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group clearfix">
+                <label class="col-lg-2 control-label"><?php $this->show('Meta description'); ?></label>
+                <div class="col-lg-10">
+                    <div class="input-group">
+                        <?php echo Element::text('stoke[keywords]', $stoke->getMetaDescription(), array('class' => 'form-control', 'placeholder' => $this->translate('Meta description for search engines'))); ?>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    </div>
                 </div>
             </div>
         </div>
-
-		<div class="form-group clearfix">
-			<label class="col-lg-2 control-label"><?php $this->show('Keywords'); ?></label>
-			<div class="col-lg-10">
-				<div class="input-group">
-                    <?php echo Element::text('stoke[keywords]', $stoke->getKeywords(), array('class' => 'form-control', 'placeholder' => $this->translate('Keywords for search engines'))); ?>
-					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-				</div>
-			</div>
-		</div>
-
-		<div class="form-group clearfix">
-			<label class="col-lg-2 control-label"><?php $this->show('Meta description'); ?></label>
-			<div class="col-lg-10">
-				<div class="input-group">
-                    <?php echo Element::text('stoke[keywords]', $stoke->getMetaDescription(), array('class' => 'form-control', 'placeholder' => $this->translate('Meta description for search engines'))); ?>
-					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-				</div>
-			</div>
-		</div>
     </div>
 
     <?php if (!$stoke->getId()): ?>
@@ -72,5 +74,7 @@ use Krystal\Form\Element;
     <button data-button="save" data-url="<?php echo $this->url('Stokes:Admin:Stoke@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save'); ?></button>
     <?php endif; ?>
     
+	<button data-button="options" class="btn btn-primary"><i class="glyphicon glyphicon-open"></i> <?php $this->show('More options'); ?></button>
     <button data-button="cancel" data-url="<?php echo $this->url('Stokes:Admin:Stoke@gridAction'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-floppy-remove"></i> <?php $this->show('Cancel'); ?></button>
+    
 </form>
