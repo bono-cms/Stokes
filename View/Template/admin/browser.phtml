@@ -31,8 +31,8 @@ use Krystal\Form\Element;
                 </th>
                 <th class="text-center"><?php $this->show('#'); ?></th>
                 <th class="text-center"><?php $this->show('Title'); ?></th>
-                <th class="text-center"><?php $this->show('Default'); ?></th>
                 <th class="text-center"><?php $this->show('SEO Enabled'); ?></th>
+                <th class="text-center"><?php $this->show('Published'); ?></th>
                 <th class="text-center"><?php $this->show('Actions'); ?></th>
             </tr>
         </thead>
@@ -43,27 +43,26 @@ use Krystal\Form\Element;
             <?php foreach ($stokes as $stoke): ?>
             <tr>
                 <td class="text-center">
-                    <input type="checkbox" name="toDelete[<?php echo $stoke->id; ?>]" />
+                    <input type="checkbox" name="toDelete[<?php echo $stoke->getId(); ?>]" />
                 </td>
-                <td class="text-center"><?php echo $stoke->id; ?></td>
-                <td class="text-center"><?php echo $stoke->title; ?></td>
+                <td class="text-center"><?php echo $stoke->getId(); ?></td>
+                <td class="text-center"><?php echo $stoke->getTitle(); ?></td>
                 <td class="text-center">
-                    <?php echo Element::radio('default', $stoke->id, $stoke->default); ?>
+                    <?php echo Element::checkbox(sprintf('seo[%s]', $stoke->getId()), $stoke->getSeo()); ?>
                 </td>
                 <td class="text-center">
-                    <?php echo Element::checkbox(sprintf('seo[%s]', $stoke->id), $stoke->seoEnabled); ?>
+                    <?php echo Element::checkbox(sprintf('published[%s]', $stoke->getId()), $stoke->getPublished()); ?>
                 </td>
                 <td class="text-center">
                     <a data-button="view" href="<?php echo $stoke->slug; ?>"></a>
-                    <a data-button="edit" href="<?php echo $this->url('Stokes:Admin:Stoke@editAction', $stoke->id); ?>"></a>
-                    <a data-button="delete" href="#" data-category="main" data-id="<?php echo $stoke->id; ?>"></a>
+                    <a data-button="edit" href="<?php echo $this->url('Stokes:Admin:Stoke@editAction', $stoke->getId()); ?>"></a>
+                    <a data-button="delete" href="#" data-category="main" data-id="<?php echo $stoke->getId(); ?>"></a>
                 </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
         
         <?php endif; ?>
-
     </table>
 
     <?php if (empty($stokes)): ?>
