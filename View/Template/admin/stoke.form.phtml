@@ -12,7 +12,7 @@ use Krystal\Form\Element;
 			<label class="col-lg-2 control-label"><?php $this->show('Title'); ?></label>
 			<div class="col-lg-10">
 				<div class="input-group">
-                    <?php echo Element::text('stoke[title]', $stoke->getName(), array('class' => 'form-control', 'placeholder' => $this->translate('Title for the stoke to be created'))); ?>
+                    <?php echo Element::text('stoke[title]', $stoke->getTitle(), array('class' => 'form-control', 'placeholder' => $this->translate('Title for the stoke to be created'))); ?>
 					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
 				</div>
 			</div>
