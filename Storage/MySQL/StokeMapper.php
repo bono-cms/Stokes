@@ -21,7 +21,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
      */
     public static function getTableName()
     {
-        return 'bono_module_stokes';
+        return self::getWithPrefix('bono_module_stokes');
     }
 
     /**
