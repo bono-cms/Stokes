@@ -94,7 +94,7 @@ final class Stoke extends AbstractController
 
         // Tweak pagination
         $paginator = $stokeManager->getPaginator();
-        $paginator->setUrl('/admin/module/stokes/page/(:var)');
+        $paginator->setUrl($this->createUrl('Stokes:Admin:Stoke@gridAction', array(), 1));
 
         // Append a breadcrumb
         $this->view->getBreadcrumbBag()
