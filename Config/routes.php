@@ -10,27 +10,27 @@
  */
 
 return array(
-    '/admin/module/stokes' => array(
+    '/%s/module/stokes' => array(
         'controller' => 'Admin:Stoke@gridAction'
     ),
     
-    '/admin/module/stokes/page/(:var)' => array(
+    '/%s/module/stokes/page/(:var)' => array(
         'controller' => 'Admin:Stoke@gridAction'
     ),
     
-    '/admin/module/stokes/add' => array(
+    '/%s/module/stokes/add' => array(
         'controller' => 'Admin:Stoke@addAction'
     ),
     
-    '/admin/module/stokes/edit/(:var)' => array(
+    '/%s/module/stokes/edit/(:var)' => array(
         'controller' => 'Admin:Stoke@editAction'
     ),
     
-    '/admin/module/stokes/save' => array(
+    '/%s/module/stokes/save' => array(
         'controller' => 'Admin:Stoke@saveAction'
     ),
     
-    '/admin/module/stokes/delete' => array(
+    '/%s/module/stokes/delete' => array(
         'controller' => 'Admin:Stoke@deleteAction'
     )
 );
