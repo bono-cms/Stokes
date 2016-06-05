@@ -42,17 +42,17 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     protected function toEntity(array $stoke)
     {
         $entity = new VirtualEntity();
-        $entity->setId((int) $stoke['id'])
-               ->setLangId($stoke['lang_id'])
-               ->setTimestampStart($stoke['timestamp_start'])
-               ->setTimestampEnd($stoke['timestamp_end'])
-               ->setName($stoke['name'])
-               ->setTitle($stoke['title'])
-               ->setIntroduction($stoke['introduction'])
-               ->setDescription($stoke['description'])
-               ->setKeywords($stoke['keywords'])
-               ->setMetaDescription($stoke['meta_description'])
-               ->setCover($stoke['cover']);
+        $entity->setId($stoke['id'], VirtualEntity::FILTER_INT)
+               ->setLangId($stoke['lang_id'], VirtualEntity::FILTER_INT)
+               ->setTimestampStart($stoke['timestamp_start'], VirtualEntity::FILTER_INT)
+               ->setTimestampEnd($stoke['timestamp_end'], VirtualEntity::FILTER_INT)
+               ->setName($stoke['name'], VirtualEntity::FILTER_TAGS)
+               ->setTitle($stoke['title'], VirtualEntity::FILTER_TAGS)
+               ->setIntroduction($stoke['introduction'], VirtualEntity::FILTER_SAFE_TAGS)
+               ->setDescription($stoke['description'], VirtualEntity::FILTER_SAFE_TAGS)
+               ->setKeywords($stoke['keywords'], VirtualEntity::FILTER_TAGS)
+               ->setMetaDescription($stoke['meta_description'], VirtualEntity::FILTER_TAGS)
+               ->setCover($stoke['cover'], VirtualEntity::FILTER_TAGS);
 
         return $entity;
     }
