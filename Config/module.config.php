@@ -2,6 +2,7 @@
 
 return array(
  'name'  => 'Stokes',
+ 'caption'  => 'Stokes',
  'route' => 'Stokes:Admin:Stoke@gridAction',
  'icon'  => 'fa fa-money fa-5x',
  'order' => 1,
