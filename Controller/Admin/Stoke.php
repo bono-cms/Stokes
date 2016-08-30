@@ -109,11 +109,12 @@ final class Stoke extends AbstractController
     /**
      * Deletes a stoke
      * 
+     * @param string $id
      * @return string
      */
-    public function deleteAction()
+    public function deleteAction($id)
     {
-        return $this->invokeRemoval('stokeManager');
+        return $this->invokeRemoval('stokeManager', $id);
     }
 
     /**

@@ -34,7 +34,7 @@ return array(
         'controller' => 'Admin:Stoke@tweakAction'
     ),
     
-    '/%s/module/stokes/delete' => array(
+    '/%s/module/stokes/delete/(:var)' => array(
         'controller' => 'Admin:Stoke@deleteAction'
     )
 );
