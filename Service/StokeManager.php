@@ -48,6 +48,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
                ->setTimestampEnd($stoke['timestamp_end'], VirtualEntity::FILTER_INT)
                ->setName($stoke['name'], VirtualEntity::FILTER_TAGS)
                ->setTitle($stoke['title'], VirtualEntity::FILTER_TAGS)
+               ->setPublished($stoke['published'], VirtualEntity::FILTER_BOOL)
                ->setIntroduction($stoke['introduction'], VirtualEntity::FILTER_SAFE_TAGS)
                ->setDescription($stoke['description'], VirtualEntity::FILTER_SAFE_TAGS)
                ->setKeywords($stoke['keywords'], VirtualEntity::FILTER_TAGS)
