@@ -30,6 +30,10 @@ return array(
         'controller' => 'Admin:Stoke@saveAction'
     ),
     
+    '/%s/module/stokes/tweak' => array(
+        'controller' => 'Admin:Stoke@tweakAction'
+    ),
+    
     '/%s/module/stokes/delete' => array(
         'controller' => 'Admin:Stoke@deleteAction'
     )
