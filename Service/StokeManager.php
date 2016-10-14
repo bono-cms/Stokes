@@ -46,14 +46,14 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
                ->setLangId($stoke['lang_id'], VirtualEntity::FILTER_INT)
                ->setTimestampStart($stoke['timestamp_start'], VirtualEntity::FILTER_INT)
                ->setTimestampEnd($stoke['timestamp_end'], VirtualEntity::FILTER_INT)
-               ->setName($stoke['name'], VirtualEntity::FILTER_TAGS)
-               ->setTitle($stoke['title'], VirtualEntity::FILTER_TAGS)
+               ->setName($stoke['name'], VirtualEntity::FILTER_HTML)
+               ->setTitle($stoke['title'], VirtualEntity::FILTER_HTML)
                ->setPublished($stoke['published'], VirtualEntity::FILTER_BOOL)
                ->setIntroduction($stoke['introduction'], VirtualEntity::FILTER_SAFE_TAGS)
                ->setDescription($stoke['description'], VirtualEntity::FILTER_SAFE_TAGS)
-               ->setKeywords($stoke['keywords'], VirtualEntity::FILTER_TAGS)
-               ->setMetaDescription($stoke['meta_description'], VirtualEntity::FILTER_TAGS)
-               ->setCover($stoke['cover'], VirtualEntity::FILTER_TAGS);
+               ->setKeywords($stoke['keywords'], VirtualEntity::FILTER_HTML)
+               ->setMetaDescription($stoke['meta_description'], VirtualEntity::FILTER_HTML)
+               ->setCover($stoke['cover'], VirtualEntity::FILTER_HTML);
 
         return $entity;
     }
