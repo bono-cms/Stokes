@@ -31,7 +31,7 @@ use Krystal\Form\Element;
                     <?php endif; ?>
                 </th>
                 <th class="text-center"><?php $this->show('#'); ?></th>
-                <th class="text-center"><?php $this->show('Title'); ?></th>
+                <th class="text-center"><?php $this->show('Name'); ?></th>
                 <th class="text-center"><?php $this->show('SEO Enabled'); ?></th>
                 <th class="text-center"><?php $this->show('Published'); ?></th>
                 <th class="text-center"><?php $this->show('Actions'); ?></th>
@@ -47,7 +47,7 @@ use Krystal\Form\Element;
                     <input type="checkbox" name="toDelete[<?php echo $stoke->getId(); ?>]" />
                 </td>
                 <td class="text-center"><?php echo $stoke->getId(); ?></td>
-                <td class="text-center"><?php echo $stoke->getTitle(); ?></td>
+                <td class="text-center"><?php echo $stoke->getName(); ?></td>
                 <td class="text-center">
                     <?php echo Element::checkbox(sprintf('seo[%s]', $stoke->getId()), $stoke->getSeo()); ?>
                 </td>

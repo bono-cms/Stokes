@@ -148,7 +148,7 @@ final class Stoke extends AbstractController
             'input' => array(
                 'source' => $input,
                 'definition' => array(
-                    'title' => new Pattern\Title(),
+                    'name' => new Pattern\Name(),
                     'introduction' => new Pattern\IntroText(),
                     'description'  => new Pattern\FullText(),
                 )

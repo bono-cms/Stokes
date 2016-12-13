@@ -96,6 +96,22 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
+     * Prepares an input
+     * 
+     * @param array $input
+     * @return array
+     */
+    private function prepareInput(array $input)
+    {
+        // Empty title is taken from name
+        if (empty($input['title'])) {
+            $input['title'] = $input['name'];
+        }
+
+        return $input;
+    }
+
+    /**
      * Adds a stoke
      * 
      * @param array $input Raw input data
@@ -103,6 +119,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
      */
     public function add(array $input)
     {
+        $input = $this->prepareInput($input);
         return $this->stokeMapper->insert(ArrayUtils::arrayWithout($input, array('slug')));
     }
 
@@ -114,6 +131,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
      */
     public function update(array $input)
     {
+        $input = $this->prepareInput($input);
         return $this->stokeMapper->update(ArrayUtils::arrayWithout($input, array('slug')));
     }
 
