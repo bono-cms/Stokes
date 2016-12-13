@@ -11,6 +11,8 @@
 
 namespace Stokes\Controller;
 
+use Site\Controller\AbstractController;
+
 final class Stoke extends AbstractController
 {
     /**
@@ -29,7 +31,22 @@ final class Stoke extends AbstractController
      * @param string $id
      * @return string
      */
-    public function viewAction($id)
+    public function indexAction($id)
     {
+        $stoke = $this->getModuleService('stokeManager')->fetchById($id);
+
+        if ($stoke !== false) {
+            $this->loadSitePlugins();
+
+            // Append a breadcrumbs
+            $this->view->getBreadcrumbBag()->addOne($stoke->getName());
+
+            return $this->view->render('stoke-single', array(
+                'stoke' => $stoke,
+                'page' => $stoke
+            ));
+        } else {
+            return false;
+        }
     }
 }
