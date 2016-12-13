@@ -22,7 +22,7 @@ final class Module extends AbstractCmsModule
     public function getServiceProviders()
     {
         $stokeMapper = $this->getMapper('/Stokes/Storage/MySQL/StokeMapper');
-        $stokeManager = new StokeManager($stokeMapper);
+        $stokeManager = new StokeManager($stokeMapper, $this->getWebPageManager());
 
         return array(
             'stokeManager' => $stokeManager

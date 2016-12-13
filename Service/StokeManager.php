@@ -12,6 +12,7 @@
 namespace Stokes\Service;
 
 use Cms\Service\AbstractManager;
+use Cms\Service\WebPageManagerInterface;
 use Stokes\Storage\StokeMapperInterface;
 use Krystal\Stdlib\VirtualEntity;
 use Krystal\Stdlib\ArrayUtils;
@@ -26,14 +27,23 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     private $stokeMapper;
 
     /**
+     * Web page manager to manage slugs
+     * 
+     * @var \Cms\Service\WebPageManagerInterface
+     */
+    private $webPageManager;
+
+    /**
      * State initialization
      * 
      * @param \Stokes\Storage\StokeMapperInterface $stokeMapper
+     * @param \Cms\Service\WebPageManagerInterface $webPageManager
      * @return void
      */
-    public function __construct(StokeMapperInterface $stokeMapper)
+    public function __construct(StokeMapperInterface $stokeMapper, WebPageManagerInterface $webPageManager)
     {
         $this->stokeMapper = $stokeMapper;
+        $this->webPageManager = $webPageManager;
     }
 
     /**
@@ -53,7 +63,10 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
                ->setDescription($stoke['description'], VirtualEntity::FILTER_SAFE_TAGS)
                ->setKeywords($stoke['keywords'], VirtualEntity::FILTER_HTML)
                ->setMetaDescription($stoke['meta_description'], VirtualEntity::FILTER_HTML)
-               ->setCover($stoke['cover'], VirtualEntity::FILTER_HTML);
+               ->setCover($stoke['cover'], VirtualEntity::FILTER_HTML)
+               ->setWebPageId($stoke['web_page_id'], VirtualEntity::FILTER_INT)
+               ->setSlug($this->webPageManager->fetchSlugByWebPageId($stoke['web_page_id']), VirtualEntity::FILTER_TAGS)
+               ->setUrl($this->webPageManager->surround($entity->getSlug(), $entity->getLangId()));
 
         return $entity;
     }
@@ -108,6 +121,13 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
             $input['title'] = $input['name'];
         }
 
+        // Empty title is take from the name
+        if (empty($input['slug'])) {
+            $input['slug'] = $input['name'];
+        }
+
+        // Update the slug
+        $input['slug'] = $this->webPageManager->sluggify($input['slug']);
         return $input;
     }
 
@@ -120,7 +140,13 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     public function add(array $input)
     {
         $input = $this->prepareInput($input);
-        return $this->stokeMapper->insert(ArrayUtils::arrayWithout($input, array('slug')));
+
+        // Insert and get the last ID
+        $this->stokeMapper->insert(ArrayUtils::arrayWithout($input, array('slug')));
+        $id = $this->getLastId();
+
+        $this->webPageManager->add($id, $input['slug'], 'Stokes', 'Stokes:Stoke@indexAction', $this->stokeMapper);
+        return true;
     }
 
     /**
@@ -132,6 +158,8 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     public function update(array $input)
     {
         $input = $this->prepareInput($input);
+
+        $this->webPageManager->update($input['web_page_id'], $input['slug']);
         return $this->stokeMapper->update(ArrayUtils::arrayWithout($input, array('slug')));
     }
 

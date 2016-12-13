@@ -8,6 +8,7 @@ use Krystal\Form\Element;
 <form data-group="stoke">
 	<div class="well">
         <?php echo Element::hidden('stoke[id]', $stoke->getId()); ?>
+        <?php echo Element::hidden('stoke[web_page_id]', $stoke->getWebPageId()); ?>
 
         <div class="form-group">
 			<label class="col-lg-2 control-label"><?php $this->show('Name'); ?></label>
