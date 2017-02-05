@@ -14,7 +14,7 @@ use Krystal\Form\Element;
          <li><a href="<?php echo $this->url('Stokes:Admin:Stoke@addAction'); ?>"><i class="glyphicon glyphicon-file"></i> <?php $this->show('Add a stoke'); ?></a> </li>
          <li class="divider"></li>
          <li><a href="#" data-url="<?php echo $this->url('Stokes:Admin:Stoke@tweakAction'); ?>" data-button="save-changes"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save changes'); ?></a></li>
-         <li><a href="#" data-button="remove-selected"><i class="glyphicon glyphicon-remove"></i> <?php $this->show('Remove selected'); ?></a></li>
+         <li><a href="#" data-url="<?php echo $this->url('Stokes:Admin:Stoke@deleteAction', null); ?>" data-button="remove-selected"><i class="glyphicon glyphicon-remove"></i> <?php $this->show('Remove selected'); ?></a></li>
       </ul>
     </div>
 </div>
