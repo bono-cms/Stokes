@@ -4,8 +4,8 @@ CREATE TABLE `bono_module_stokes` (
 
 	`id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`lang_id` INT NOT NULL,
-	`timestamp_start` INT NOT NULL,
-	`timestamp_end` INT NOT NULL,
+	`start` TIMESTAMP,
+	`end` TIMESTAMP,
 	`name` varchar(254) NOT NULL,
 	`title` varchar(254) NOT NULL,
     `published` varchar(1),
