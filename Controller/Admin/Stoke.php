@@ -38,7 +38,7 @@ final class Stoke extends AbstractController
         // Load view plugins
         $this->view->getPluginBag()
                    ->appendScript('@Stokes/admin/stoke.form.js')
-                   ->load(array($this->getWysiwygPluginName(), 'datepicker'));
+                   ->load(array($this->getWysiwygPluginName(), 'datetimepicker'));
 
         // Append breadcrumbs
         $this->view->getBreadcrumbBag()->addOne('Stokes', 'Stokes:Admin:Stoke@gridAction')
