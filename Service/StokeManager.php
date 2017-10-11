@@ -128,6 +128,10 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
 
         // Update the slug
         $input['slug'] = $this->webPageManager->sluggify($input['slug']);
+
+        // Safe type-casting
+        $input['web_page_id'] = (int) $input['web_page_id'];
+
         return $input;
     }
 
