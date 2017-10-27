@@ -11,18 +11,15 @@
 
 namespace Stokes\Storage\MySQL;
 
-use Cms\Storage\MySQL\AbstractStorageDropper;
+use Cms\Storage\MySQL\AbstractMapper;
 
-final class Dropper extends AbstractStorageDropper
+final class StokeTranslationMapper extends AbstractMapper
 {
     /**
      * {@inheritDoc}
      */
-    protected function getTables()
+    public static function getTableName()
     {
-        return array(
-            StokeMapper::getTableName(),
-            StokeTranslationMapper::getTableName()
-        );
+        return self::getWithPrefix('bono_module_stokes_translations');
     }
 }

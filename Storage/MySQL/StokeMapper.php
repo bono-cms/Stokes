@@ -25,6 +25,14 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public static function getTranslationTable()
+    {
+        return StokeTranslationMapper::getTableName();
+    }
+
+    /**
      * Updates published state of a stoke
      * 
      * @param string $id Stoke id
