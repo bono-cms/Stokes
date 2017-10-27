@@ -6,6 +6,7 @@ CREATE TABLE `bono_module_stokes` (
 	`start` TIMESTAMP,
 	`end` TIMESTAMP,
     `published` varchar(1),
+    `seo` SMALLINT NOT NULL COMMENT 'Whether SEO enabled or not',
 	`cover` varchar(254) NOT NULL
 
 ) DEFAULT CHARSET = UTF8;

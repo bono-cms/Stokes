@@ -45,6 +45,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
             self::getFullColumnName('start'),
             self::getFullColumnName('end'),
             self::getFullColumnName('published'),
+            self::getFullColumnName('seo'),
             self::getFullColumnName('cover'),
             StokeTranslationMapper::getFullColumnName('lang_id'),
             StokeTranslationMapper::getFullColumnName('web_page_id'),
