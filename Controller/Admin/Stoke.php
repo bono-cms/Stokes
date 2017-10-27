@@ -57,7 +57,8 @@ final class Stoke extends AbstractController
     public function addAction()
     {
         $stoke = new VirtualEntity();
-        $stoke->setPublished(true);
+        $stoke->setPublished(true)
+              ->setSeo(true);
 
         return $this->createForm($stoke, 'Add a stoke');
     }
