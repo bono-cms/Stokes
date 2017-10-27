@@ -14,6 +14,14 @@ namespace Stokes\Service;
 interface StokeManagerInterface
 {
     /**
+     * Returns a collection of switching URLs
+     * 
+     * @param string $id Stock ID
+     * @return array
+     */
+    public function getSwitchUrls($id);
+
+    /**
      * Update published states by their associated ids
      * 
      * @param array $pair

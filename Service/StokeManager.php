@@ -47,6 +47,17 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
+     * Returns a collection of switching URLs
+     * 
+     * @param string $id Stock ID
+     * @return array
+     */
+    public function getSwitchUrls($id)
+    {
+        return $this->stokeMapper->createSwitchUrls($id, 'Stokes', 'Stokes:Stoke@indexAction');
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected function toEntity(array $stoke)
