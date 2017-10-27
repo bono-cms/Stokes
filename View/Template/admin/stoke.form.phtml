@@ -1,98 +1,111 @@
-<?php defined('KRYSTAL') or die; ?>
 <?php
 
 use Krystal\Form\Element;
+defined('KRYSTAL') or die;
 
 ?>
 
 <form data-group="stoke">
-	<div class="well">
-        <?php echo Element::hidden('stoke[id]', $stoke->getId()); ?>
-        <?php echo Element::hidden('stoke[web_page_id]', $stoke->getWebPageId()); ?>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#stoke" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-file"></i> <?php $this->show('Stoke'); ?></a></li>
+        <li role="presentation"><a href="#configuration" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-th-list"></i> <?php $this->show('Configuration'); ?></a></li>
+	</ul>
+    
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="stoke" role="tabpanel">
+            <div class="well">
+                <?php echo Element::hidden('stoke[id]', $stoke->getId()); ?>
+                <?php echo Element::hidden('stoke[web_page_id]', $stoke->getWebPageId()); ?>
 
-        <div class="form-group">
-			<label class="col-lg-2 control-label"><?php $this->show('Name'); ?></label>
-			<div class="col-lg-10">
-				<div class="input-group">
-                    <?php echo Element::text('stoke[name]', $stoke->getName(), array('class' => 'form-control', 'placeholder' => $this->translate('Name for the stoke to be created'))); ?>
-					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-				</div>
-			</div>
-		</div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"><?php $this->show('Name'); ?></label>
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <?php echo Element::text('stoke[name]', $stoke->getName(), array('class' => 'form-control', 'placeholder' => $this->translate('Name for the stoke to be created'))); ?>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="form-group">
-			<label class="col-lg-2 control-label"><?php $this->show('Start date'); ?></label>
-			<div class="col-lg-10">
-				<div class="input-group">
-                    <?php echo Element::text('stoke[start]', $stoke->getStart(), array('class' => 'form-control', 'data-plugin' => 'datetimepicker', 'placeholder' => $this->translate(''))); ?>
-					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-				</div>
-			</div>
-		</div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"><?php $this->show('Introduction'); ?></label>
+                    <div class="col-lg-10">
+                        <?php echo Element::textarea('stoke[introduction]', $stoke->getIntroduction(), array('class' => 'form-control', 'data-wysiwyg' => 'true')); ?>
+                    </div>
+                </div>
 
-        <div class="form-group">
-			<label class="col-lg-2 control-label"><?php $this->show('End date'); ?></label>
-			<div class="col-lg-10">
-				<div class="input-group">
-                    <?php echo Element::text('stoke[end]', $stoke->getEnd(), array('class' => 'form-control', 'data-plugin' => 'datetimepicker', 'placeholder' => $this->translate(''))); ?>
-					<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-				</div>
-			</div>
-		</div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"><?php $this->show('Full description'); ?></label>
+                    <div class="col-lg-10">
+                        <?php echo Element::textarea('stoke[description]', $stoke->getIntroduction(), array('class' => 'form-control', 'data-wysiwyg' => 'true')); ?>
+                    </div>
+                </div>
+                
+                <div class="options">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"><?php $this->show('Title'); ?></label>
+                        <div class="col-lg-10">
+                            <div class="input-group">
+                                <?php echo Element::text('stoke[title]', $stoke->getTitle(), array('class' => 'form-control', 'placeholder' => $this->translate('Title for the stoke to be created'))); ?>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"><?php $this->show('Slug'); ?></label>
+                        <div class="col-lg-10">
+                            <div class="input-group">
+                                <?php echo Element::text('stoke[slug]', $stoke->getSlug(), array('class' => 'form-control', 'data-input' => 'slug', 'placeholder' => 'URL slug for this stoke. By default is taken from a title')); ?>
+                                <span class="input-group-addon">
+                                    <a href="#" data-button="slug"><i class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="<?php $this->show('Refresh the slug'); ?>"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
 
-		<div class="form-group">
-			<label class="col-lg-2 control-label"><?php $this->show('Introduction'); ?></label>
-			<div class="col-lg-10">
-                <?php echo Element::textarea('stoke[introduction]', $stoke->getIntroduction(), array('class' => 'form-control', 'data-wysiwyg' => 'true')); ?>
-			</div>
-		</div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"><?php $this->show('Keywords'); ?></label>
+                        <div class="col-lg-10">
+                            <div class="input-group">
+                                <?php echo Element::text('stoke[keywords]', $stoke->getKeywords(), array('class' => 'form-control', 'placeholder' => $this->translate('Keywords for search engines'))); ?>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            </div>
+                        </div>
+                    </div>
 
-		<div class="form-group">
-			<label class="col-lg-2 control-label"><?php $this->show('Full description'); ?></label>
-			<div class="col-lg-10">
-                <?php echo Element::textarea('stoke[description]', $stoke->getIntroduction(), array('class' => 'form-control', 'data-wysiwyg' => 'true')); ?>
-			</div>
-		</div>
-
-        <div class="options">
-            <div class="form-group">
-                <label class="col-lg-2 control-label"><?php $this->show('Title'); ?></label>
-                <div class="col-lg-10">
-                    <div class="input-group">
-                        <?php echo Element::text('stoke[title]', $stoke->getTitle(), array('class' => 'form-control', 'placeholder' => $this->translate('Title for the stoke to be created'))); ?>
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"><?php $this->show('Meta description'); ?></label>
+                        <div class="col-lg-10">
+                            <div class="input-group">
+                                <?php echo Element::text('stoke[keywords]', $stoke->getMetaDescription(), array('class' => 'form-control', 'placeholder' => $this->translate('Meta description for search engines'))); ?>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="form-group">
-                <label class="col-lg-2 control-label"><?php $this->show('Slug'); ?></label>
-                <div class="col-lg-10">
-                    <div class="input-group">
-                        <?php echo Element::text('stoke[slug]', $stoke->getSlug(), array('class' => 'form-control', 'data-input' => 'slug', 'placeholder' => 'URL slug for this stoke. By default is taken from a title')); ?>
-                        <span class="input-group-addon">
-                            <a href="#" data-button="slug"><i class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="<?php $this->show('Refresh the slug'); ?>"></i></a>
-                        </span>
+        </div>
+
+        <div class="tab-pane fade in" id="configuration" role="tabpanel">
+            <div class="well">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"><?php $this->show('Start date'); ?></label>
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <?php echo Element::text('stoke[start]', $stoke->getStart(), array('class' => 'form-control', 'data-plugin' => 'datetimepicker', 'placeholder' => $this->translate(''))); ?>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label class="col-lg-2 control-label"><?php $this->show('Keywords'); ?></label>
-                <div class="col-lg-10">
-                    <div class="input-group">
-                        <?php echo Element::text('stoke[keywords]', $stoke->getKeywords(), array('class' => 'form-control', 'placeholder' => $this->translate('Keywords for search engines'))); ?>
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-lg-2 control-label"><?php $this->show('Meta description'); ?></label>
-                <div class="col-lg-10">
-                    <div class="input-group">
-                        <?php echo Element::text('stoke[keywords]', $stoke->getMetaDescription(), array('class' => 'form-control', 'placeholder' => $this->translate('Meta description for search engines'))); ?>
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"><?php $this->show('End date'); ?></label>
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <?php echo Element::text('stoke[end]', $stoke->getEnd(), array('class' => 'form-control', 'data-plugin' => 'datetimepicker', 'placeholder' => $this->translate(''))); ?>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -102,11 +115,10 @@ use Krystal\Form\Element;
     <?php if (!$stoke->getId()): ?>
     <button data-button="add" data-back-url="<?php echo $this->url('Stokes:Admin:Stoke@editAction', null); ?>" data-url="<?php echo $this->url('Stokes:Admin:Stoke@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Add'); ?></button>
     <?php else: ?>
-    
+
     <button data-button="save" data-url="<?php echo $this->url('Stokes:Admin:Stoke@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Save'); ?></button>
     <?php endif; ?>
-    
+
 	<button data-button="options" class="btn btn-primary"><i class="glyphicon glyphicon-open"></i> <?php $this->show('More options'); ?></button>
     <button data-button="cancel" data-url="<?php echo $this->url('Stokes:Admin:Stoke@gridAction'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-floppy-remove"></i> <?php $this->show('Cancel'); ?></button>
-    
 </form>
