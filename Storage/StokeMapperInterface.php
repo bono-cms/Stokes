@@ -29,14 +29,7 @@ interface StokeMapperInterface
      * @param boolean $published Whether to fetch only published stokes
      * @return array
      */
-    public function fetchAllByPage($page, $itemsPerPage, $published);
-
-    /**
-     * Fetch all published
-     * 
-     * @return array
-     */
-    public function fetchAllPublished();
+    public function fetchAll($page, $itemsPerPage, $published);
 
     /**
      * Fetches stoke data by its associated id

@@ -78,7 +78,7 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
      * @param boolean $published Whether to fetch only published stokes
      * @return array
      */
-    public function fetchAllByPage($page, $itemsPerPage, $published)
+    public function fetchAll($page, $itemsPerPage, $published)
     {
         $db = $this->createWebPageSelect($this->getColumns())
                     // Language ID filter
@@ -98,16 +98,6 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
         }
 
         return $db->queryAll();
-    }
-
-    /**
-     * Fetch all published
-     * 
-     * @return array
-     */
-    public function fetchAllPublished()
-    {
-        return $this->fetchAllByPage(null, null, true);
     }
 
     /**

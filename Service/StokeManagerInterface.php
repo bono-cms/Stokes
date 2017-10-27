@@ -85,13 +85,6 @@ interface StokeManagerInterface
     public function fetchById($id, $withTranslations);
 
     /**
-     * Fetches all published stoke entities
-     * 
-     * @return array
-     */
-    public function fetchAllPublished();
-
-    /**
      * Fetches all stoke entities filtered by pagination
      * 
      * @param integer $page
@@ -99,5 +92,5 @@ interface StokeManagerInterface
      * @param boolean $published Whether to fetch only published ones
      * @return array
      */
-    public function fetchAllByPage($page, $itemsPerPage, $published);
+    public function fetchAll($page, $itemsPerPage, $published);
 }

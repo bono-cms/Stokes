@@ -190,16 +190,6 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Fetches all published stoke entities
-     * 
-     * @return array
-     */
-    public function fetchAllPublished()
-    {
-        return $this->prepareResult($this->stokeMapper->fetchAllPublished());
-    }
-
-    /**
      * Fetches all stoke entities filtered by pagination
      * 
      * @param integer $page
@@ -207,8 +197,8 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
      * @param boolean $published Whether to fetch only published ones
      * @return array
      */
-    public function fetchAllByPage($page, $itemsPerPage, $published)
+    public function fetchAll($page, $itemsPerPage, $published)
     {
-        return $this->prepareResults($this->stokeMapper->fetchAllByPage($page, $itemsPerPage, $published));
+        return $this->prepareResults($this->stokeMapper->fetchAll($page, $itemsPerPage, $published));
     }
 }

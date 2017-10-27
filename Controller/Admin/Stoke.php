@@ -91,7 +91,7 @@ final class Stoke extends AbstractController
         $stokeManager = $this->getModuleService('stokeManager');
 
         // Fetch stoke entities for display
-        $stokes = $stokeManager->fetchAllByPage($page, $this->getSharedPerPageCount(), false);
+        $stokes = $stokeManager->fetchAll($page, $this->getSharedPerPageCount(), false);
 
         // Tweak pagination
         $paginator = $stokeManager->getPaginator();
