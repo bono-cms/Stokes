@@ -143,15 +143,11 @@ final class Stoke extends AbstractController
      */
     public function tweakAction()
     {
-        if ($this->request->isPost() && $this->request->isAjax()) {
-            $published = $this->request->getPost('published');
+        $stokeManager = $this->getModuleService('stokeManager');
+        $stokeManager->updateSettings($this->request->getPost());
 
-            $stokeManager = $this->getModuleService('stokeManager');
-            $stokeManager->updatePublished($published);
-
-            $this->flashBag->set('success', 'Configuration has been updated successfully');
-            return '1';
-        }
+        $this->flashBag->set('success', 'Configuration has been updated successfully');
+        return '1';
     }
 
     /**

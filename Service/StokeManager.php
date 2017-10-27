@@ -84,20 +84,14 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Update published states by their associated ids
+     * Update settings
      * 
-     * @param array $pair
+     * @param array $settings
      * @return boolean
      */
-    public function updatePublished(array $pair)
+    public function updateSettings($settings)
     {
-        foreach ($pair as $id => $state) {
-            if (!$this->stokeMapper->updatePublishedState($id, $state)) {
-                return false;
-            }
-        }
-
-        return true;
+        return $this->stokeMapper->updateSettings($settings);
     }
 
     /**

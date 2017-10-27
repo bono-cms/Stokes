@@ -60,15 +60,14 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     }
 
     /**
-     * Updates published state of a stoke
+     * Update settings
      * 
-     * @param string $id Stoke id
-     * @param string $state The state. Either 1 or 0
+     * @param array $settings
      * @return boolean
      */
-    public function updatePublishedState($id, $state)
+    public function updateSettings($settings)
     {
-        return $this->updateColumnByPk($id, 'published', $state);
+        return $this->updateColumns($settings, array('published', 'seo'));
     }
 
     /**

@@ -22,12 +22,12 @@ interface StokeManagerInterface
     public function getSwitchUrls($id);
 
     /**
-     * Update published states by their associated ids
+     * Update settings
      * 
-     * @param array $pair
+     * @param array $settings
      * @return boolean
      */
-    public function updatePublished(array $pair);
+    public function updateSettings($settings);
 
     /**
      * Returns prepared paginator instance
