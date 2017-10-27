@@ -12,6 +12,7 @@
 namespace Stokes\Storage\MySQL;
 
 use Cms\Storage\MySQL\AbstractMapper;
+use Cms\Storage\MySQL\WebPageMapper;
 use Stokes\Storage\StokeMapperInterface;
 
 final class StokeMapper extends AbstractMapper implements StokeMapperInterface
@@ -30,6 +31,31 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     public static function getTranslationTable()
     {
         return StokeTranslationMapper::getTableName();
+    }
+
+    /**
+     * Returns shared columns
+     * 
+     * @return array
+     */
+    private function getColumns()
+    {
+        return array(
+            self::getFullColumnName('id'),
+            self::getFullColumnName('start'),
+            self::getFullColumnName('end'),
+            self::getFullColumnName('published'),
+            self::getFullColumnName('cover'),
+            StokeTranslationMapper::getFullColumnName('lang_id'),
+            StokeTranslationMapper::getFullColumnName('web_page_id'),
+            StokeTranslationMapper::getFullColumnName('name'),
+            StokeTranslationMapper::getFullColumnName('title'),
+            StokeTranslationMapper::getFullColumnName('introduction'),
+            StokeTranslationMapper::getFullColumnName('description'),
+            StokeTranslationMapper::getFullColumnName('keywords'),
+            StokeTranslationMapper::getFullColumnName('meta_description'),
+            WebPageMapper::getFullColumnName('slug')
+        );
     }
 
     /**
@@ -54,21 +80,24 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
      */
     public function fetchAllByPage($page, $itemsPerPage, $published)
     {
-        $db = $this->db->select('*')
-                        ->from(self::getTableName())
-                        ->whereEquals('lang_id', $this->getLangId());
+        $db = $this->createWebPageSelect($this->getColumns())
+                    // Language ID filter
+                    ->whereEquals(StokeTranslationMapper::getFullColumnName('lang_id'), $this->getLangId());
 
         if ($published === true) {
-            $db->andWhereEquals('published', '1')
-               ->orderBy('timestamp_start')
+            $db->andWhereEquals(self::getFullColumnName('published'), '1')
+               ->orderBy(self::getFullColumnName('end'))
                ->desc();
         } else {
-            $db->orderBy('id')
+            $db->orderBy(self::getFullColumnName('id'))
                ->desc();
         }
 
-        return $db->paginate($page, $itemsPerPage)
-                  ->queryAll();
+        if ($page !== null && $itemsPerPage !== null) {
+            $db->paginate($page, $itemsPerPage);
+        }
+
+        return $db->queryAll();
     }
 
     /**
@@ -78,54 +107,18 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
      */
     public function fetchAllPublished()
     {
-        return $this->db->select('*')
-                        ->from(self::getTableName())
-                        ->whereEquals('lang_id', $this->getlang_id())
-                        ->andWhereEquals('published', '1')
-                        ->queryAll();
+        return $this->fetchAllByPage(null, null, true);
     }
 
     /**
-     * Fetches a record by its associated id
+     * Fetches stoke data by its associated id
      * 
-     * @param string $id
+     * @param string $id Stoke id
+     * @param boolean $withTranslations Whether to fetch translations or not
      * @return array
      */
-    public function fetchById($id)
+    public function fetchById($id, $withTranslations)
     {
-        return $this->findByPk($id);
-    }
-
-    /**
-     * Delete a record by its associated id
-     * 
-     * @param string $id
-     * @return string
-     */
-    public function deleteById($id)
-    {
-        return $this->deleteByPk($id);
-    }
-
-    /**
-     * Insert a record
-     * 
-     * @param array $input Raw input data
-     * @return boolean
-     */
-    public function insert(array $input)
-    {
-        return $this->persist($this->getWithLang($input));
-    }
-
-    /**
-     * Updates a record
-     * 
-     * @param array $input Raw input data
-     * @return void
-     */
-    public function update(array $input)
-    {
-        return $this->persist($input);
+        return $this->findWebPage($this->getColumns(), $id, $withTranslations);
     }
 }

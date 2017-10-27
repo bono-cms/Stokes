@@ -71,9 +71,10 @@ interface StokeManagerInterface
      * Fetches stoke's entity by its associated id
      * 
      * @param string $id
+     * @param boolean $withTranslations Whether to fetch translations
      * @return array
      */
-    public function fetchById($id);
+    public function fetchById($id, $withTranslations);
 
     /**
      * Fetches all published stoke entities

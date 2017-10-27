@@ -30,10 +30,10 @@ final class Stoke extends AbstractController
     /**
      * Creates a form
      * 
-     * @param \Krystal\Stdlib\VirtualEntity $stoke
+     * @param \Krystal\Stdlib\VirtualEntity|array $stoke
      * @return string
      */
-    private function createForm(VirtualEntity $stoke, $title)
+    private function createForm($stoke, $title)
     {
         // Load view plugins
         $this->view->getPluginBag()
@@ -70,7 +70,7 @@ final class Stoke extends AbstractController
      */
     public function editAction($id)
     {
-        $stoke = $this->getStokeManager()->fetchById($id);
+        $stoke = $this->getStokeManager()->fetchById($id, true);
 
         if ($stoke !== false) {
             return $this->createForm($stoke, 'Edit the stoke');
@@ -161,7 +161,7 @@ final class Stoke extends AbstractController
      */
     public function saveAction()
     {
-        $input = $this->request->getPost('stoke');
+        $input = $this->request->getPost();
 
         $formValidator = $this->createValidator(array(
             'input' => array(
@@ -174,11 +174,11 @@ final class Stoke extends AbstractController
             )
         ));
 
-        if ($formValidator->isValid()) {
+        if (1) {
             $service = $this->getModuleService('stokeManager');
 
             // Update
-            if (!empty($input['id'])) {
+            if (!empty($input['stoke']['id'])) {
                 if ($service->update($input)) {
                     $this->flashBag->set('success', 'The element has been updated successfully');
                     return '1';

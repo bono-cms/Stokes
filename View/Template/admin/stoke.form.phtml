@@ -1,6 +1,8 @@
 <?php
 
 use Krystal\Form\Element;
+use Cms\Service\LanguageManager;
+
 defined('KRYSTAL') or die;
 
 ?>
@@ -10,90 +12,105 @@ defined('KRYSTAL') or die;
         <li role="presentation" class="active"><a href="#stoke" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-file"></i> <?php $this->show('Stoke'); ?></a></li>
         <li role="presentation"><a href="#configuration" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-th-list"></i> <?php $this->show('Configuration'); ?></a></li>
 	</ul>
-    
+
     <div class="tab-content">
         <div class="tab-pane fade in active" id="stoke" role="tabpanel">
             <div class="well">
-                <?php echo Element::hidden('stoke[id]', $stoke->getId()); ?>
-                <?php echo Element::hidden('stoke[web_page_id]', $stoke->getWebPageId()); ?>
+                <?php $this->loadPartial('language-tabs'); ?>
 
-                <div class="form-group">
-                    <label class="col-lg-2 control-label"><?php $this->show('Name'); ?></label>
-                    <div class="col-lg-10">
-                        <div class="input-group">
-                            <?php echo Element::text('stoke[name]', $stoke->getName(), array('class' => 'form-control', 'placeholder' => $this->translate('Name for the stoke to be created'))); ?>
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        </div>
-                    </div>
-                </div>
+                <div class="tab-content">
+                    <?php foreach ($languages as $index => $language): ?>
+                    <div class="tab-pane fade in <?php echo $index == 0 ? 'active' : null; ?>" id="<?php printf('language-%s', $language->getId()); ?>" role="tabpanel">
+                        <?php $entity = LanguageManager::findByLangId($language->getId(), $stoke); ?>
 
-                <div class="form-group">
-                    <label class="col-lg-2 control-label"><?php $this->show('Introduction'); ?></label>
-                    <div class="col-lg-10">
-                        <?php echo Element::textarea('stoke[introduction]', $stoke->getIntroduction(), array('class' => 'form-control', 'data-wysiwyg' => 'true')); ?>
-                    </div>
-                </div>
+                        <?php echo Element::hidden(sprintf('translation[%s][id]', $language->getId()), $entity->getId()); ?>
+                        <?php echo Element::hidden(sprintf('translation[%s][lang_id]', $language->getId()), $language->getId()); ?>
+                        <?php echo Element::hidden(sprintf('translation[%s][web_page_id]', $language->getId()), $language->getWebPageId()); ?>
 
-                <div class="form-group">
-                    <label class="col-lg-2 control-label"><?php $this->show('Full description'); ?></label>
-                    <div class="col-lg-10">
-                        <?php echo Element::textarea('stoke[description]', $stoke->getIntroduction(), array('class' => 'form-control', 'data-wysiwyg' => 'true')); ?>
-                    </div>
-                </div>
-                
-                <div class="options">
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label"><?php $this->show('Title'); ?></label>
-                        <div class="col-lg-10">
-                            <div class="input-group">
-                                <?php echo Element::text('stoke[title]', $stoke->getTitle(), array('class' => 'form-control', 'placeholder' => $this->translate('Title for the stoke to be created'))); ?>
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        <?php $this->loadPartial('language-name', array('language' => $language)); ?>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"><?php $this->show('Name'); ?></label>
+                            <div class="col-lg-10">
+                                <div class="input-group">
+                                    <?php echo Element::text(sprintf('translation[%s][name]', $language->getId()), $entity->getName(), array('class' => 'form-control', 'placeholder' => $this->translate('Name for the stoke to be created'))); ?>
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label"><?php $this->show('Slug'); ?></label>
-                        <div class="col-lg-10">
-                            <div class="input-group">
-                                <?php echo Element::text('stoke[slug]', $stoke->getSlug(), array('class' => 'form-control', 'data-input' => 'slug', 'placeholder' => 'URL slug for this stoke. By default is taken from a title')); ?>
-                                <span class="input-group-addon">
-                                    <a href="#" data-button="slug"><i class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="<?php $this->show('Refresh the slug'); ?>"></i></a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label"><?php $this->show('Keywords'); ?></label>
-                        <div class="col-lg-10">
-                            <div class="input-group">
-                                <?php echo Element::text('stoke[keywords]', $stoke->getKeywords(), array('class' => 'form-control', 'placeholder' => $this->translate('Keywords for search engines'))); ?>
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"><?php $this->show('Introduction'); ?></label>
+                            <div class="col-lg-10">
+                                <?php echo Element::textarea(sprintf('translation[%s][introduction]', $language->getId()), $entity->getIntroduction(), array('class' => 'form-control', 'data-wysiwyg' => 'true')); ?>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label"><?php $this->show('Meta description'); ?></label>
-                        <div class="col-lg-10">
-                            <div class="input-group">
-                                <?php echo Element::text('stoke[keywords]', $stoke->getMetaDescription(), array('class' => 'form-control', 'placeholder' => $this->translate('Meta description for search engines'))); ?>
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label"><?php $this->show('Full description'); ?></label>
+                            <div class="col-lg-10">
+                                <?php echo Element::textarea(sprintf('translation[%s][description]', $language->getId()), $entity->getIntroduction(), array('class' => 'form-control', 'data-wysiwyg' => 'true')); ?>
                             </div>
                         </div>
+
+                        <div class="options">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label"><?php $this->show('Title'); ?></label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <?php echo Element::text(sprintf('translation[%s][title]', $language->getId()), $entity->getTitle(), array('class' => 'form-control', 'placeholder' => $this->translate('Title for the stoke to be created'))); ?>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label"><?php $this->show('Slug'); ?></label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <?php echo Element::text(sprintf('translation[%s][slug]', $language->getId()), $entity->getSlug(), array('class' => 'form-control', 'data-input' => 'slug', 'placeholder' => 'URL slug for this stoke. By default is taken from a title')); ?>
+                                        <span class="input-group-addon">
+                                            <a href="#" data-button="slug"><i class="glyphicon glyphicon-refresh" data-toggle="tooltip" title="<?php $this->show('Refresh the slug'); ?>"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label"><?php $this->show('Keywords'); ?></label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <?php echo Element::text(sprintf('translation[%s][keywords]', $language->getId()), $entity->getKeywords(), array('class' => 'form-control', 'placeholder' => $this->translate('Keywords for search engines'))); ?>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label"><?php $this->show('Meta description'); ?></label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <?php echo Element::text(sprintf('translation[%s][meta_description]', $language->getId()), $entity->getMetaDescription(), array('class' => 'form-control', 'placeholder' => $this->translate('Meta description for search engines'))); ?>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
 
         <div class="tab-pane fade in" id="configuration" role="tabpanel">
+            <?php echo Element::hidden('stoke[id]', $entity->getId()); ?>
+
             <div class="well">
                 <div class="form-group">
                     <label class="col-lg-2 control-label"><?php $this->show('Start date'); ?></label>
                     <div class="col-lg-10">
                         <div class="input-group">
-                            <?php echo Element::text('stoke[start]', $stoke->getStart(), array('class' => 'form-control', 'data-plugin' => 'datetimepicker', 'placeholder' => $this->translate(''))); ?>
+                            <?php echo Element::text('stoke[start]', $entity->getStart(), array('class' => 'form-control', 'data-plugin' => 'datetimepicker', 'placeholder' => $this->translate(''))); ?>
                             <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         </div>
                     </div>
@@ -103,7 +120,7 @@ defined('KRYSTAL') or die;
                     <label class="col-lg-2 control-label"><?php $this->show('End date'); ?></label>
                     <div class="col-lg-10">
                         <div class="input-group">
-                            <?php echo Element::text('stoke[end]', $stoke->getEnd(), array('class' => 'form-control', 'data-plugin' => 'datetimepicker', 'placeholder' => $this->translate(''))); ?>
+                            <?php echo Element::text('stoke[end]', $entity->getEnd(), array('class' => 'form-control', 'data-plugin' => 'datetimepicker', 'placeholder' => $this->translate(''))); ?>
                             <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         </div>
                     </div>
@@ -112,7 +129,7 @@ defined('KRYSTAL') or die;
         </div>
     </div>
 
-    <?php if (!$stoke->getId()): ?>
+    <?php if (!$entity->getId()): ?>
     <button data-button="add" data-back-url="<?php echo $this->url('Stokes:Admin:Stoke@editAction', null); ?>" data-url="<?php echo $this->url('Stokes:Admin:Stoke@saveAction'); ?>" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> <?php $this->show('Add'); ?></button>
     <?php else: ?>
 

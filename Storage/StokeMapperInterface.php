@@ -40,34 +40,11 @@ interface StokeMapperInterface
     public function fetchAllPublished();
 
     /**
-     * Fetches a record by its associated id
+     * Fetches stoke data by its associated id
      * 
-     * @param string $id
+     * @param string $id Stoke id
+     * @param boolean $withTranslations Whether to fetch translations or not
      * @return array
      */
-    public function fetchById($id);
-
-    /**
-     * Delete a record by its associated id
-     * 
-     * @param string $id
-     * @return string
-     */
-    public function deleteById($id);
-
-    /**
-     * Insert a record
-     * 
-     * @param array $input Raw input data
-     * @return boolean
-     */
-    public function insert(array $input);
-
-    /**
-     * Updates a record
-     * 
-     * @param array $input Raw input data
-     * @return void
-     */
-    public function update(array $input);
+    public function fetchById($id, $withTranslations);
 }

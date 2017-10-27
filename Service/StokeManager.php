@@ -54,8 +54,9 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
         $entity = new VirtualEntity();
         $entity->setId($stoke['id'], VirtualEntity::FILTER_INT)
                ->setLangId($stoke['lang_id'], VirtualEntity::FILTER_INT)
-               ->setTimestampStart($stoke['timestamp_start'], VirtualEntity::FILTER_INT)
-               ->setTimestampEnd($stoke['timestamp_end'], VirtualEntity::FILTER_INT)
+               ->setWebPageId($stoke['web_page_id'], VirtualEntity::FILTER_INT)
+               ->setStart($stoke['start'], VirtualEntity::FILTER_INT)
+               ->setEnd($stoke['end'], VirtualEntity::FILTER_INT)
                ->setName($stoke['name'], VirtualEntity::FILTER_HTML)
                ->setTitle($stoke['title'], VirtualEntity::FILTER_HTML)
                ->setPublished($stoke['published'], VirtualEntity::FILTER_BOOL)
@@ -64,8 +65,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
                ->setKeywords($stoke['keywords'], VirtualEntity::FILTER_HTML)
                ->setMetaDescription($stoke['meta_description'], VirtualEntity::FILTER_HTML)
                ->setCover($stoke['cover'], VirtualEntity::FILTER_HTML)
-               ->setWebPageId($stoke['web_page_id'], VirtualEntity::FILTER_INT)
-               ->setSlug($this->webPageManager->fetchSlugByWebPageId($stoke['web_page_id']), VirtualEntity::FILTER_TAGS)
+               ->setSlug($stoke['slug'], VirtualEntity::FILTER_TAGS)
                ->setUrl($this->webPageManager->surround($entity->getSlug(), $entity->getLangId()));
 
         return $entity;
@@ -109,30 +109,17 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
     }
 
     /**
-     * Prepares an input
+     * Save a page
      * 
      * @param array $input
-     * @return array
+     * @return boolean
      */
-    private function prepareInput(array $input)
+    private function savePage(array $input)
     {
-        // Empty title is taken from name
-        if (empty($input['title'])) {
-            $input['title'] = $input['name'];
-        }
+        $data = ArrayUtils::arrayWithout($input['stoke'], array('slug'));
+        $translation = $input['translation'];
 
-        // Empty title is take from the name
-        if (empty($input['slug'])) {
-            $input['slug'] = $input['name'];
-        }
-
-        // Update the slug
-        $input['slug'] = $this->webPageManager->sluggify($input['slug']);
-
-        // Safe type-casting
-        $input['web_page_id'] = (int) $input['web_page_id'];
-
-        return $input;
+        return $this->stokeMapper->savePage('Stokes', 'Stokes:Stoke@indexAction', $data, $translation);
     }
 
     /**
@@ -143,14 +130,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
      */
     public function add(array $input)
     {
-        $input = $this->prepareInput($input);
-
-        // Insert and get the last ID
-        $this->stokeMapper->insert(ArrayUtils::arrayWithout($input, array('slug')));
-        $id = $this->getLastId();
-
-        $this->webPageManager->add($id, $input['slug'], 'Stokes', 'Stokes:Stoke@indexAction', $this->stokeMapper);
-        return true;
+        return $this->savePage($input);
     }
 
     /**
@@ -161,10 +141,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
      */
     public function update(array $input)
     {
-        $input = $this->prepareInput($input);
-
-        $this->webPageManager->update($input['web_page_id'], $input['slug']);
-        return $this->stokeMapper->update(ArrayUtils::arrayWithout($input, array('slug')));
+        return $this->savePage($input);
     }
 
     /**
@@ -175,7 +152,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
      */
     public function deleteById($id)
     {
-        return $this->stokeMapper->deleteById($id);
+        return $this->stokeMapper->deletePage($id);
     }
 
     /**
@@ -186,12 +163,7 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
      */
     public function deleteByIds(array $ids)
     {
-        foreach ($ids as $id) {
-            if ($this->stokeMapper->deleteById($id)) {
-                return false;
-            }
-        }
-
+        $this->stokeMapper->deletePage($ids);
         return true;
     }
 
@@ -199,11 +171,16 @@ final class StokeManager extends AbstractManager implements StokeManagerInterfac
      * Fetches stoke's entity by its associated id
      * 
      * @param string $id
+     * @param boolean $withTranslations Whether to fetch translations
      * @return array
      */
-    public function fetchById($id)
+    public function fetchById($id, $withTranslations)
     {
-        return $this->prepareResult($this->stokeMapper->fetchById($id));
+        if ($withTranslations === true) {
+            return $this->prepareResults($this->stokeMapper->fetchById($id, true));
+        } else {
+            return $this->prepareResult($this->stokeMapper->fetchById($id, false));
+        }
     }
 
     /**
