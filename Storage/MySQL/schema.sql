@@ -16,6 +16,7 @@ CREATE TABLE `bono_module_stokes_translations` (
 
 	`id` INT NOT NULL,
 	`lang_id` INT NOT NULL,
+    `web_page_id` INT NOT NULL COMMENT 'Attached Web-Page ID',
 	`name` varchar(254) NOT NULL,
 	`title` varchar(254) NOT NULL,
 	`introduction` LONGTEXT NOT NULL,
