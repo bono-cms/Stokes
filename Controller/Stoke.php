@@ -33,7 +33,8 @@ final class Stoke extends AbstractController
      */
     public function indexAction($id)
     {
-        $stoke = $this->getModuleService('stokeManager')->fetchById($id);
+        $sm = $this->getModuleService('stokeManager');
+        $stoke = $sm->fetchById($id, false);
 
         if ($stoke !== false) {
             $this->loadSitePlugins();
@@ -43,8 +44,10 @@ final class Stoke extends AbstractController
 
             return $this->view->render('stoke-single', array(
                 'stoke' => $stoke,
-                'page' => $stoke
+                'page' => $stoke,
+                'languages' => $sm->getSwitchUrls($id)
             ));
+
         } else {
             return false;
         }
