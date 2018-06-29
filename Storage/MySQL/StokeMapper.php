@@ -41,21 +41,21 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     private function getColumns()
     {
         return array(
-            self::getFullColumnName('id'),
-            self::getFullColumnName('start'),
-            self::getFullColumnName('end'),
-            self::getFullColumnName('published'),
-            self::getFullColumnName('seo'),
-            self::getFullColumnName('cover'),
-            StokeTranslationMapper::getFullColumnName('lang_id'),
-            StokeTranslationMapper::getFullColumnName('web_page_id'),
-            StokeTranslationMapper::getFullColumnName('name'),
-            StokeTranslationMapper::getFullColumnName('title'),
-            StokeTranslationMapper::getFullColumnName('introduction'),
-            StokeTranslationMapper::getFullColumnName('description'),
-            StokeTranslationMapper::getFullColumnName('keywords'),
-            StokeTranslationMapper::getFullColumnName('meta_description'),
-            WebPageMapper::getFullColumnName('slug')
+            self::column('id'),
+            self::column('start'),
+            self::column('end'),
+            self::column('published'),
+            self::column('seo'),
+            self::column('cover'),
+            StokeTranslationMapper::column('lang_id'),
+            StokeTranslationMapper::column('web_page_id'),
+            StokeTranslationMapper::column('name'),
+            StokeTranslationMapper::column('title'),
+            StokeTranslationMapper::column('introduction'),
+            StokeTranslationMapper::column('description'),
+            StokeTranslationMapper::column('keywords'),
+            StokeTranslationMapper::column('meta_description'),
+            WebPageMapper::column('slug')
         );
     }
 
@@ -82,14 +82,14 @@ final class StokeMapper extends AbstractMapper implements StokeMapperInterface
     {
         $db = $this->createWebPageSelect($this->getColumns())
                     // Language ID filter
-                    ->whereEquals(StokeTranslationMapper::getFullColumnName('lang_id'), $this->getLangId());
+                    ->whereEquals(StokeTranslationMapper::column('lang_id'), $this->getLangId());
 
         if ($published === true) {
-            $db->andWhereEquals(self::getFullColumnName('published'), '1')
-               ->orderBy(self::getFullColumnName('end'))
+            $db->andWhereEquals(self::column('published'), '1')
+               ->orderBy(self::column('end'))
                ->desc();
         } else {
-            $db->orderBy(self::getFullColumnName('id'))
+            $db->orderBy(self::column('id'))
                ->desc();
         }
 
