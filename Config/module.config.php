@@ -1,10 +1,20 @@
 <?php
 
+/**
+ * Module configuration container
+ */
+
 return array(
- 'name'  => 'Stokes',
- 'caption'  => 'Stokes',
- 'route' => 'Stokes:Admin:Stoke@gridAction',
- 'icon'  => 'fa fa-money fa-5x',
- 'order' => 1,
- 'description' => 'Stoke module allows you to add random stuff that has data of expiration',
+    'name'  => 'Stokes',
+    'description' => 'Stoke module allows you to add random stuff that has data of expiration',
+    'menu' => array(
+        'name' => 'Stokes',
+        'icon' => 'far fa-money-bill-alt',
+        'items' => array(
+            array(
+                'route' => 'Stokes:Admin:Stoke@gridAction',
+                'name' => 'View all stokes'
+            )
+        )
+    )
 );
